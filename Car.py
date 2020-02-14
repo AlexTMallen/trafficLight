@@ -9,3 +9,4 @@ class Car:
 
     def draw(self, surface):
         pygame.draw.fill(surface, self.color, self.rect)
+
