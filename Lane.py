@@ -25,4 +25,4 @@ class Lane:
         self.start = (x, y)
 
     def draw(self, surface):
-        pygame.draw(surface, self.colors["lightG"], self.rect)
+        pygame.draw.rect(surface, self.colors["lightG"], self.rect)
