@@ -1,11 +1,14 @@
 import pygame
-import colors
+import json
 
 class Lane:
 
     def __init__(self, rect, direction):
         self.rect = rect
         self.direction = direction
+        with open("colors.json") as f:
+            text = f.read()
+            self.colors = json.loads(text)
 
         if direction == 1:
             x = 0
@@ -22,4 +25,4 @@ class Lane:
         self.start = (x, y)
 
     def draw(self, surface):
-        pygame.draw.fill(surface, colors["lightGray"], self.rect)
+        pygame.draw(surface, self.colors["lightG"], self.rect)

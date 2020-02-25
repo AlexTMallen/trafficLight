@@ -1,5 +1,6 @@
 import pygame
 import json
+from Lane import Lane
 
 def main():
     # setup
@@ -9,7 +10,9 @@ def main():
 
     w = pygame.display.set_mode((500, 500))
     w.fill(colors["green"])
-
+    #laneRight = Lane(pygame.Rect(0, 100, 500, 100), 1)
+    #laneRight.draw(w)
+    
     waitTime = 10
     running = True
 
