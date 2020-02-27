@@ -32,13 +32,13 @@ class Street:
                 self.lanes.append(
                     Lane(
                         (point1[0] - laneNum * Lane.WIDTH - Lane.WIDTH // 2, point1[1]),
-                        (point1[1] - laneNum * Lane.WIDTH - Lane.WIDTH // 2, point2[1])
+                        (point1[0] - laneNum * Lane.WIDTH - Lane.WIDTH // 2, point2[1])
                     )
                 )
             for laneNum in range(numNeg):
                 self.lanes.append(
                     Lane(
-                        (point1[1] + laneNum * Lane.WIDTH + Lane.WIDTH // 2, point2[1]),
-                        (point1[1] + laneNum * Lane.WIDTH + Lane.WIDTH // 2, point1[2])
+                        (point1[0] + laneNum * Lane.WIDTH + Lane.WIDTH // 2, point2[1]),
+                        (point1[0] + laneNum * Lane.WIDTH + Lane.WIDTH // 2, point1[1])
                     )
                 )
