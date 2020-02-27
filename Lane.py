@@ -1,25 +1,15 @@
 import pygame
-import colors
 
 class Lane:
-
-    def __init__(self, rect, direction):
-        self.rect = rect
-        self.direction = direction
-
-        if direction == 1:
-            x = 0
-            y = 0
+    WIDTH = 30;
+    def __init__(self, start, end):
+        self.start = start
+        if start[0] == end[0]:
+            self.rect = pygame.Rect(start[0] - self.WIDTH // 2, min(start[1], end[1]), self.WIDTH, abs(end[0] - start[0]))
+            self.direction = (0, (end[1] - start[1]) // abs(end[1] - start[1]))
         else:
-            x = rect.width
-            y = rect.height
-
-        if rect.width > rect.height:
-            y = (2 * rect.y + rect.height) // 2
-        else:
-            x = (2 * rect.x + rect.width) // 2
-
-        self.start = (x, y)
+            self.rect = pygame.Rect(min(start[0], end[0]), start[1] - self.WIDTH // 2, abs(end[0] - start[0]), self.WIDTH)
+            self.direction = ((end[0] - start[0]) // abs(end[0] - start[0]), 0)
 
     def draw(self, surface):
         pygame.draw.fill(surface, colors["lightGray"], self.rect)
