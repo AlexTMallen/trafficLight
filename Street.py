@@ -10,17 +10,25 @@ class Street:
         self.numPos = numPos
         self.point1 = point1
         self.point2 = point2
-        self.lanes = []
+        self.lanesPos = []
+        self.lanesNeg = []
+        if point1[0] == point2[0]:
+            self.direction = (0, (point2[1] - point1[1]) // abs(point2[1] - point1[1]))
+        else:
+            self.direction = ((point2[0] - point1[0]) // abs(point2[0] - point1[0]), 0)
+
+
+
         if point1[1] == point2[1]:
             for laneNum in range(numPos):
-                self.lanes.append(
+                self.lanesPos.append(
                     Lane(
                         (point1[0], point1[1] + laneNum * Lane.WIDTH + Lane.WIDTH // 2),
                         (point2[0], point1[1] + laneNum * Lane.WIDTH + Lane.WIDTH // 2)
                     )
                 )
             for laneNum in range(numNeg):
-                self.lanes.append(
+                self.lanesNeg.append(
                     Lane(
                         (point2[0], point1[1] - laneNum * Lane.WIDTH - Lane.WIDTH // 2),
                         (point1[0], point1[1] - laneNum * Lane.WIDTH - Lane.WIDTH // 2)
@@ -29,14 +37,14 @@ class Street:
 
         else:
             for laneNum in range(numPos):
-                self.lanes.append(
+                self.lanesPos.append(
                     Lane(
                         (point1[0] - laneNum * Lane.WIDTH - Lane.WIDTH // 2, point1[1]),
                         (point1[1] - laneNum * Lane.WIDTH - Lane.WIDTH // 2, point2[1])
                     )
                 )
             for laneNum in range(numNeg):
-                self.lanes.append(
+                self.lanesNeg.append(
                     Lane(
                         (point1[1] + laneNum * Lane.WIDTH + Lane.WIDTH // 2, point2[1]),
                         (point1[1] + laneNum * Lane.WIDTH + Lane.WIDTH // 2, point1[2])
