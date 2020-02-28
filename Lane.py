@@ -12,4 +12,4 @@ class Lane:
             self.direction = ((end[0] - start[0]) // abs(end[0] - start[0]), 0)
 
     def draw(self, surface):
-        pygame.draw.fill(surface, colors["lightG"], self.rect)
+        pygame.draw.rect(surface, self.colors["lightG"], self.rect)

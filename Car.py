@@ -12,7 +12,7 @@ class Car:
         self.updateRect()
 
     def draw(self, surface):
-        pygame.draw.fill(surface, self.color, self.rect)
+        pygame.draw.rect(surface, self.color, self.rect)
 
     def updateRect(self):
         if self.lane.direction[0] == 0:
