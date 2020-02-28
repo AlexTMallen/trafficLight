@@ -1,13 +1,23 @@
 import pygame
 
 class Light:
+    RADIUS = 10
 
-    def __init__(self, , center): ##the literal center of the box
-        self.rect = drawrect()
-        self.color = GREEN!!!???
+    def __init__(self, lane, intersection): ##the literal center of the box
+        self.color = "green"
+        if lane.direction == (0, 1):
+            self.center = (lane.start[0], intersection.y+intersection.rect.height)
+        if lane.direction == (0, -1):
+            self.center = (lane.start[0], intersection.y)
+        if lane.direction == (1, 0):
+            self.center = (intersection.x+intersection.rect.width, lane.start[1])
+        if lane.direction == (-1, 0):
+            self.center = (intersection.x, lane.start[1])
 
-    def drawrect(self,x,y,horiz,vert): ###how do you make a rect
-        b = rect
-        return b
+
+
     def drawLight(self, surface):
-        pygame.draw.ellipse(surface, self.color, self.rect)
+        pygame.draw.circle(surface, self.color, self.center, self.RADIUS)
+
+    def changeLights(self):
+        pass
