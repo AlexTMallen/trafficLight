@@ -14,10 +14,5 @@ class Light:
         if lane.direction == (-1, 0):
             self.center = (intersection.x, lane.start[1])
 
-
-
     def drawLight(self, surface):
         pygame.draw.circle(surface, self.color, self.center, self.RADIUS)
-
-    def changeLights(self):
-        pass

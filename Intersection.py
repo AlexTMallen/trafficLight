@@ -1,32 +1,47 @@
 import pygame
+import json
 from Street import Street
 from Lane import Lane
 from Light import Light
 
+
 class Intersection:
-#spawned automatically by main which does the math to find out where the streets intersect
-#streets encompass all the lanes going into an intersection so there will always be TWO streets (horiz and vert)
-    def __init__ (self,streetH,streetV): #topLeft and bottomRIght are already given as the intersection corners
-        #lists holding all lights opposite a lane of that direction
-        self.lightup = []
-        self.lightdown = []
-        self.lightleft = []
-        self.lightright = []
-        #spawn lights for horizontal street
+    """spawned automatically by main which does the math to find out where the streets intersect
+    streets encompass all the lanes going into an intersection so there will always be TWO streets (horiz and vert)"""
+
+    def __init__(self, streetH, streetV):
+        self.streetH = streetH
+        self.streetV = streetV
+
+        # calculate coordinates of intersection
+        self.x = streetV.point1[0] - streetV.numPos * Lane.WIDTH
+        self.y = streetH.point1[1] - streetH.numNeg * Lane.WIDTH
+        wide = (streetV.numPos + streetV.numNeg) * Lane.WIDTH
+        long = (streetH.numPos + streetH.numNeg) * Lane.WIDTH
+        self.rect = pygame.Rect(self.x, self.y, wide, long)
+
+        # lists holding all lights opposite a lane of that direction
+        self.lightsUp = []
+        self.lightsDown = []
+        self.lightsLeft = []
+        self.lightsRight = []
+        # spawn lights for horizontal street
         for current in self.streetH.lanesPos:
-            self.lightright.append(Light(current,self))
+            self.lightsRight.append(Light(current, self))
         for current in self.streetH.lanesNeg:
-            self.lightright.append(Light(current,self))
+            self.lightsRight.append(Light(current, self))
         for current in self.streetV.lanesPos:
-            self.lightright.append(Light(current,self))
-        for current in self.streetV.laneNeg:
-            self.lightright.append(Light(current,self))
-        #calculate coordinates of intersect
-        self.x = streetV.point1[0] - streetV.lanesPos.length * Lane.WIDTH
-        self.y = streetH.point1[1] - streetH.lanesNeg.length * Lane.WIDTH
-        wide = (streetV.lanesPos.length + streetV.laneNeg.length) * Lane.WIDTH
-        long = (streetH.lanesPos.length + streetH.laneNeg.length) * Lane.WIDTH
-        self.rect = pygame.Rect(x, y, wide,long)
+            self.lightsRight.append(Light(current, self))
+        for current in self.streetV.lanesNeg:
+            self.lightsRight.append(Light(current, self))
+
+
+        with open("colors.json") as f:
+            self.colors = json.loads(f.read())
 
     def draw(self, surface):
-        pygame.draw.fill(surface, colors["darkG"], self.rect)
+        pygame.draw.rect(surface, self.colors["darkG"], self.rect)
+
+    def changeLights(self):
+        # use traffic data to determine when to change the lights
+        pass

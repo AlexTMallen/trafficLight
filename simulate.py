@@ -1,9 +1,12 @@
 import pygame
 import json
+from random import randint
+
 from Lane import Lane
 from Car import Car
 from Street import Street
-from random import randint
+from Intersection import Intersection
+
 
 def main():
     # setup
@@ -19,6 +22,7 @@ def main():
     streetH = Street((0, 800 // 2), (800, 800 // 2), 2, 2)
     streetV = Street((800 // 2, 0), (800 // 2, 800), 1, 4)
     streets = [streetH, streetV]
+    intersection = Intersection(streetH, streetV)
 
     for l in streetH.lanes:
         l.draw(w)
@@ -39,6 +43,7 @@ def main():
             carLane = streets[i].lanes[randint(0, len(streets[i].lanes) - 1)]
             car = Car((255, 0, 0), carLane)
             cars.append(car)
+        intersection.draw(w)
 
         w.fill(colors["green"])
         for l in streetH.lanes:

@@ -4,6 +4,12 @@ from Lane import Lane
 class Street:
 
     def __init__(self, point1, point2, numPos, numNeg):
+        """
+        :param point1: center of starting point
+        :param point2: ""
+        :param numPos: number of positive lanes
+        :param numNeg: ""
+        """
         # Streets should always list in increasing order (left to right or up to down)
         self.numLanes = numPos + numNeg
         self.numNeg = numNeg
@@ -16,8 +22,6 @@ class Street:
             self.direction = (0, (point2[1] - point1[1]) // abs(point2[1] - point1[1]))
         else:
             self.direction = ((point2[0] - point1[0]) // abs(point2[0] - point1[0]), 0)
-
-
 
         if point1[1] == point2[1]:
             for laneNum in range(numPos):
@@ -50,3 +54,5 @@ class Street:
                         (point1[0] + laneNum * Lane.WIDTH + Lane.WIDTH // 2, point1[1])
                     )
                 )
+
+        self.lanes = self.lanesNeg + self.lanesPos

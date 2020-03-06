@@ -1,4 +1,5 @@
 import pygame
+import json
 
 class Lane:
     WIDTH = 30;
@@ -10,6 +11,9 @@ class Lane:
         else:
             self.rect = pygame.Rect(min(start[0], end[0]), start[1] - self.WIDTH // 2, abs(end[0] - start[0]), self.WIDTH)
             self.direction = ((end[0] - start[0]) // abs(end[0] - start[0]), 0)
+
+        with open("colors.json") as f:
+            self.colors = json.loads(f.read())
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.colors["lightG"], self.rect)
