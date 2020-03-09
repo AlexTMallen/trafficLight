@@ -31,12 +31,23 @@ def main():
     cars = []
 
     waitTime = 10
+    flipTime = 290
+    cycleNumber = 0
     running = True
 
     while running:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 return
+        flipTime = flipTime + 1
+        if flipTime == 300:
+            if cycleNumber == 0:
+                intersection.changeTo([0,1,2,3])
+                cycleNumber = 1
+            else:
+                intersection.changeTo([4,5,6,7,8])
+                cycleNumber = 0
+            flipTime = 0
 
         if randint(1, 100) == 1:
             i = randint(0, 1)
