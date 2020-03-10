@@ -17,7 +17,8 @@ class Intersection:
         self.lightColors = ['green', 'red']
         self.timer = threading.Timer(5.0, self.changeLights, self.lightColors.index('green'))
         self.cycles = [
-            []
+            [0,1,2,3], #horizontal lights
+            [4,5,6,7,8] #vertical lights
         ]
 
         # calculate coordinates of intersection
@@ -53,27 +54,28 @@ class Intersection:
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.lightColors["darkG"], self.rect)
-        '''
-        for light in self.lightsUp:
-            light.color = self.lightColors[0]
-        for light in self.lightsDown:
-            light.color = self.lightColors[0]
-        for light in self.lightsLeft:
-            light.color = self.lightColors[1]
-        for light in self.lightsRight:
-            light.color = self.lightColors[1]
 
-    '''
-    def changeTo(self, cycle):
+    def changeToYellow(self):
         for light in self.lights:
             if light.color == 'green':
                 light.color = 'yellow'
-                #wait 3.5 seconds
-                light.color = 'red'
+
+    def changeToRed(self):
+        for light in self.lights:
+            light.color = 'red'
+    def changeToCycle(self, cycle):
+        for light in self.lights:
+            light.color = 'red'
 
         for light in cycle:
             self.lights[light].color = 'green'
 
+    def findStops(self):
+        for light in self.lights:
+            if light.color == 'red':
+                light.lane.stoppoints.append()
+
+#currently not being called
     def changeLights(self, i):
         # use traffic data to determine when to change the lights
         if 'green' in self.lightColors:
