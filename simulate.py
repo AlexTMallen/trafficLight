@@ -31,7 +31,7 @@ def main():
     cars = []
 
     waitTime = 10
-    flipTime = 290
+    flipTime = 590
     cycleNumber = 0
     running = True
 
@@ -41,11 +41,17 @@ def main():
                 return
         flipTime = flipTime + 1
         if flipTime == 300:
+            intersection.changeToYellow()
+
+        if flipTime == 500:
+            intersection.changeToRed()
+
+        if flipTime == 600:
             if cycleNumber == 0:
-                intersection.changeTo([0,1,2,3])
+                intersection.changeToCycle(intersection.cycles[0])
                 cycleNumber = 1
             else:
-                intersection.changeTo([4,5,6,7,8])
+                intersection.changeToCycle(intersection.cycles[1])
                 cycleNumber = 0
             flipTime = 0
 
