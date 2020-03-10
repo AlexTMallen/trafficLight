@@ -73,7 +73,16 @@ class Intersection:
     def findStops(self):
         for light in self.lights:
             if light.color == 'red':
-                light.lane.stoppoints.append()
+                if light.lane.direction == (1,0):
+                    light.lane.stopPoints.append(self.x)
+                if light.lane.direction == (-1,0):
+                    light.lane.stopPoints.append(self.x + self.wide)
+                if light.lane.direction == (0,1):
+                    light.lane.stopPoints.append(self.y)
+                if light.lane.direction == (0,-1):
+                    light.lane.stopPoints.append(self.y + self.long)
+            if light.color == 'green':
+                light.lane.stopPoints = []
 
 #currently not being called
     def changeLights(self, i):
