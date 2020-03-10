@@ -70,7 +70,7 @@ def main():
         intersection.draw(w)
 
         for c in cars:
-            c.distance += 1
+            c.distance += c.speed
             c.updateRect()
             c.draw(w)
             if c.distance >= 800 + 2 * c.LENGTH:
