@@ -16,6 +16,7 @@ class Lane:
             self.colors = json.loads(f.read())
 
         self.stopPoints = []
+        self.light = None
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.colors["lightG"], self.rect)

@@ -15,10 +15,11 @@ class Intersection:
         self.streetH = streetH
         self.streetV = streetV
         self.lightColors = ['green', 'red']
-        self.timer = threading.Timer(5.0, self.changeLights, self.lightColors.index('green'))
+
+        # a list of lists of which green lights can be on at the same time
         self.cycles = [
-            [0,1,2,3], #horizontal lights
-            [4,5,6,7,8] #vertical lights
+            list(range(self.streetH.numLanes)),  # horizontal lights
+            list(range(self.streetH.numLanes, self.streetH.numLanes + self.streetV.numLanes))  # vertical lights
         ]
 
         # calculate coordinates of intersection
@@ -36,17 +37,25 @@ class Intersection:
         self.lights = []
         # spawn lights for horizontal street
         for current_lane in self.streetH.lanesPos:
-            self.lightsRight.append(Light(current_lane, self))
-            self.lights.append(Light(current_lane, self))
+            light = Light(current_lane, self)
+            self.lightsRight.append(light)
+            self.lights.append(light)
+            current_lane.light = light
         for current_lane in self.streetH.lanesNeg:
-            self.lightsRight.append(Light(current_lane, self))
-            self.lights.append(Light(current_lane, self))
+            light = Light(current_lane, self)
+            self.lightsLeft.append(light)
+            self.lights.append(light)
+            current_lane.light = light
         for current_lane in self.streetV.lanesPos:
-            self.lightsRight.append(Light(current_lane, self))
-            self.lights.append(Light(current_lane, self))
+            light = Light(current_lane, self)
+            self.lightsDown.append(light)
+            self.lights.append(light)
+            current_lane.light = light
         for current_lane in self.streetV.lanesNeg:
-            self.lightsRight.append(Light(current_lane, self))
-            self.lights.append(Light(current_lane, self))
+            light = Light(current_lane, self)
+            self.lightsUp.append(light)
+            self.lights.append(light)
+            current_lane.light = light
 
 
         with open("colors.json") as f:
@@ -63,6 +72,7 @@ class Intersection:
     def changeToRed(self):
         for light in self.lights:
             light.color = 'red'
+
     def changeToCycle(self, cycle):
         for light in self.lights:
             light.color = 'red'

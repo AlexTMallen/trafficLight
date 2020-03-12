@@ -6,14 +6,26 @@ class Car:
     LENGTH = 50
     FOLLOWING_TIME = 10
 
-    def __init__(self, color, lane):
+    def __init__(self, color, lane, intersection):
         self.color = color
         self.hitBoxColor = (0, 0, 255, 10)
         self.lane = lane
         self.distance = 0
-        self.speed = 1
+        self.speed = 5
         self.rect = None
         self.hitBox = None
+        self.inIntersection = False
+        self.intersection = intersection
+        self.updateRect()
+
+    def move(self):
+        if self.hitBox.colliderect(self.intersection):
+            if self.lane.light.color == "red" and not self.inIntersection:
+                self.speed = 0
+            elif self.lane.light.color == "green" and self.inIntersection:
+                self.speed = 1
+            self.inIntersection = True
+        self.distance += self.speed
         self.updateRect()
 
     def draw(self, surface):

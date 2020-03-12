@@ -58,7 +58,7 @@ def main():
         if randint(1, 100) == 1:
             i = randint(0, 1)
             carLane = streets[i].lanes[randint(0, len(streets[i].lanes) - 1)]
-            car = Car((255, 0, 0), carLane)
+            car = Car((255, 0, 0), carLane, intersection)
             cars.append(car)
 
         w.fill(colors["green"])
@@ -70,8 +70,7 @@ def main():
         intersection.draw(w)
 
         for c in cars:
-            c.distance += c.speed
-            c.updateRect()
+            c.move()
             c.draw(w)
             if c.distance >= 800 + 2 * c.LENGTH:
                 cars.remove(c)

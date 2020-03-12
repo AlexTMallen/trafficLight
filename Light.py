@@ -5,7 +5,7 @@ class Light:
     RADIUS = 10
 
     def __init__(self, lane, intersection): ##the literal center of the box
-        self.color = "green"
+        self.color = "green"  # "green" "yellow" "red"
         with open("colors.json") as f:
             self.colors = json.loads(f.read())
         if lane.direction == (0, 1):
