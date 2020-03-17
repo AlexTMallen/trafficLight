@@ -57,7 +57,7 @@ def main():
                 cycleNumber = 0
             flipTime = 0
 
-        if np.random.randint(40) == 0:
+        if np.random.randint(20) == 0:
             i = np.random.randint(2)
             carLane = streets[i].lanes[np.random.randint(0, len(streets[i].lanes) - 1)]
             car = Car((255, 0, 0), carLane, intersection, desiredSpeed=np.random.normal(1.35, 0.1))
@@ -88,7 +88,7 @@ def main():
 
         for c in cars:
             c.move(carRects)
-            c.draw(w)
+            c.draw(w, showHitbox=False)
 
             if c.distance >= c.lane.length + 2 * c.LENGTH:
                 cars.remove(c)

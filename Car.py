@@ -37,8 +37,9 @@ class Car:
         print("Rect", self.rect)
         print(self.hitBox)
 
-    def draw(self, surface):
-        pygame.draw.rect(surface, self.hitBoxColor, self.hitBox)
+    def draw(self, surface, showHitbox=True):
+        if showHitbox:
+            pygame.draw.rect(surface, self.hitBoxColor, self.hitBox)
         pygame.draw.rect(surface, self.color, self.rect)
 
     def updateRect(self):
