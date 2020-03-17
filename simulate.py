@@ -1,6 +1,6 @@
 import pygame
 import json
-from random import randint
+import numpy as np
 
 from Lane import Lane
 from Car import Car
@@ -14,13 +14,15 @@ def main():
         text = f.read()
         colors = json.loads(text)
 
-    w = pygame.display.set_mode((800, 800))
+    wWidth = 800
+    wHeight = 800
+    w = pygame.display.set_mode((wWidth, wHeight))
     w.fill(colors["green"])
 
     width = 30
 
-    streetH = Street((0, 800 // 2), (800, 800 // 2), 2, 2)
-    streetV = Street((800 // 2, 0), (800 // 2, 800), 1, 4)
+    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 2, 2)
+    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 1, 4)
     streets = [streetH, streetV]
     intersection = Intersection(streetH, streetV)
 
@@ -55,11 +57,12 @@ def main():
                 cycleNumber = 0
             flipTime = 0
 
-        if randint(1, 100) == 1:
-            i = randint(0, 1)
-            carLane = streets[i].lanes[randint(0, len(streets[i].lanes) - 1)]
-            car = Car((255, 0, 0), carLane, intersection)
+        if np.random.randint(40) == 0:
+            i = np.random.randint(2)
+            carLane = streets[i].lanes[np.random.randint(0, len(streets[i].lanes) - 1)]
+            car = Car((255, 0, 0), carLane, intersection, desiredSpeed=np.random.normal(1.35, 0.1))
             cars.append(car)
+            #TODO make sure the cars dont overlap when you spawn them
 
         w.fill(colors["green"])
         for l in streetH.lanes:
@@ -68,11 +71,26 @@ def main():
             l.draw(w)
 
         intersection.draw(w)
+        carRects = []
+        for car in cars:
+            carRects.append(car.rect)
+
+        for i, car in enumerate(cars):
+
+            collisionIdxs = car.hitBox.collidelistall(carRects)
+            if collisionIdxs != [i]:
+                collisionIdxs.remove(i)
+                if len(collisionIdxs) > 1:
+                    car.speed = 0  # TODO: better way to handle this?
+                    print("multiple collisions detected")
+                else:
+                    car.speed = cars[collisionIdxs[0]].speed * 0.7
 
         for c in cars:
-            c.move()
+            c.move(carRects)
             c.draw(w)
-            if c.distance >= 800 + 2 * c.LENGTH:
+
+            if c.distance >= c.lane.length + 2 * c.LENGTH:
                 cars.remove(c)
 
         for light in intersection.lights:
