@@ -1,8 +1,10 @@
 import pygame
 import json
 
+
 class Lane:
-    WIDTH = 30;
+    WIDTH = 30
+
     def __init__(self, start, end):
         self.start = start
         if start[0] == end[0]:

@@ -1,6 +1,7 @@
 import pygame
 from Lane import Lane
 
+
 class Street:
 
     def __init__(self, point1, point2, numPos, numNeg):

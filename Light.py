@@ -1,10 +1,11 @@
 import pygame
 import json
 
+
 class Light:
     RADIUS = 10
 
-    def __init__(self, lane, intersection): ##the literal center of the box
+    def __init__(self, lane, intersection):  # The literal center of the box
         self.color = "green"  # "green" "yellow" "red"
         with open("colors.json") as f:
             self.colors = json.loads(f.read())
