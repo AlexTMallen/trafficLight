@@ -37,6 +37,7 @@ def main():
     cycleNumber = 0
     running = True
 
+    carRects = []
     while running:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
@@ -61,8 +62,8 @@ def main():
             i = np.random.randint(2)
             carLane = streets[i].lanes[np.random.randint(0, len(streets[i].lanes) - 1)]
             car = Car((255, 0, 0), carLane, intersection, desiredSpeed=np.random.normal(1.35, 0.1))
-            cars.append(car)
-            #TODO make sure the cars dont overlap when you spawn them
+            if not car.hitBox.collidelistall(carRects):  # Making sure the cars don't overlap when spawned
+                cars.append(car)
 
         w.fill(colors["green"])
         for l in streetH.lanes:
@@ -98,6 +99,7 @@ def main():
 
         pygame.display.flip()
         pygame.time.wait(waitTime)
+
 
 if __name__ == "__main__":
     main()
