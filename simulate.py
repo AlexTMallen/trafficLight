@@ -82,7 +82,7 @@ def main():
             if collisionIdxs != [i]:
                 collisionIdxs.remove(i)
                 if len(collisionIdxs) > 1:
-                    car.speed = 0  # TODO: better way to handle this?
+                    # TODO: better way to handle this?
                     print("multiple collisions detected")
                 else:
                     car.speed = cars[collisionIdxs[0]].speed * 0.7
