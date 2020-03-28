@@ -15,6 +15,7 @@ class Intersection:
         self.streetH = streetH
         self.streetV = streetV
         self.lightColors = ['green', 'red']
+        self.carsInIntersection = 0
 
         # a list of lists of which green lights can be on at the same time
         self.cycles = [
