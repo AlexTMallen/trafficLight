@@ -18,26 +18,37 @@ class Car:
         self.hitBox = None
         self.inIntersection = False
         self.intersection = intersection
+        self.addedSelfToIntersection = False
+        self.removedSelfFromIntersection = False
         self.updateRect()
 
     def move(self, carRects):
+        if self.rect.colliderect(self.intersection):
+            if not self.addedSelfToIntersection:
+                self.intersection.carsInIntersection += 1
+                self.addedSelfToIntersection = True
+        else:
+            if not self.removedSelfFromIntersection and self.addedSelfToIntersection:
+                self.intersection.carsInIntersection -= 1
+                self.removedSelfFromIntersection = True
+
         if self.hitBox.colliderect(self.intersection):
             if self.lane.light.color == "red" and not self.inIntersection:
                 self.speed = 0
-                print("Stopped" + "\n" * 5)
+                # print("Stopped" + "\n" * 5)
             self.inIntersection = True
         else:
             self.inIntersection = False
         if self.speed < self.desiredSpeed:
             # if (the light you've been waiting on is now green)
             #       or (you're not in an intersection and there's no car in front of you (aka collides only with self))
-            if (self.lane.light.color == "green" and self.inIntersection) \
+            if (self.lane.light.color == "green" and self.inIntersection and self.intersection.carsInIntersection == 0) \
                     or ((not self.inIntersection or self.rect.colliderect(self.intersection)) and len(self.hitBox.collidelistall(carRects)) == 1):
                 self.speed = (self.desiredSpeed + self.speed) / 2
         self.distance += self.speed
         self.updateRect()
-        print("Rect", self.rect)
-        print(self.hitBox)
+        # print("Rect", self.rect)
+        # print(self.hitBox)
 
     def draw(self, surface, showHitbox=True):
         if showHitbox:
