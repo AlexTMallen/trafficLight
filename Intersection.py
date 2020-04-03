@@ -24,11 +24,9 @@ class Intersection:
         ]
 
         # calculate coordinates of intersection
-        self.x = streetV.point1[0] - streetV.numPos * Lane.WIDTH
-        self.y = streetH.point1[1] - streetH.numNeg * Lane.WIDTH
-        wide = (streetV.numPos + streetV.numNeg) * Lane.WIDTH
-        long = (streetH.numPos + streetH.numNeg) * Lane.WIDTH
-        self.rect = pygame.Rect(self.x, self.y, wide, long)
+        self.x = streetV.point1[0] - streetV.width // 2
+        self.y = streetH.point1[1] - streetH.width // 2
+        self.rect = pygame.Rect(self.x, self.y, streetV.width, streetH.width)
 
         # lists holding all lights opposite a lane of that direction
         self.lightsUp = []
@@ -37,27 +35,28 @@ class Intersection:
         self.lightsRight = []
         self.lights = []
         # spawn lights for horizontal street
-        for current_lane in self.streetH.lanesPos:
+        # TODO: possibly restructure how we store lights to account for different kinds of lights
+        for current_lane in self.streetH.lanesPos + self.streetH.lanesPosLeft:
             light = Light(current_lane, self)
             self.lightsRight.append(light)
             self.lights.append(light)
             current_lane.light = light
-        for current_lane in self.streetH.lanesNeg:
+        for current_lane in self.streetH.lanesNeg + self.streetH.lanesNegLeft:
             light = Light(current_lane, self)
             self.lightsLeft.append(light)
             self.lights.append(light)
             current_lane.light = light
-        for current_lane in self.streetV.lanesPos:
+        # creates lights for vertical street
+        for current_lane in self.streetV.lanesPos + self.streetV.lanesPosLeft:
             light = Light(current_lane, self)
             self.lightsDown.append(light)
             self.lights.append(light)
             current_lane.light = light
-        for current_lane in self.streetV.lanesNeg:
+        for current_lane in self.streetV.lanesNeg + self.streetV.lanesNegLeft:
             light = Light(current_lane, self)
             self.lightsUp.append(light)
             self.lights.append(light)
             current_lane.light = light
-
 
         with open("colors.json") as f:
             self.lightColors = json.loads(f.read())

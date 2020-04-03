@@ -25,7 +25,7 @@ class Street:
         self.lanesPos = []
         self.lanesNeg = []
         self.intersectionMidpoint = intersectionMidpoint
-        self.width = Lane.width * self.numLanes
+        self.width = Lane.WIDTH * self.numLanes
 
         # if vertical then the direction is (0, +/-1)
         if point1[0] == point2[0]:
@@ -54,8 +54,8 @@ class Street:
                 )
                 self.lanesNegLeft.append(
                     Lane(
-                        (self.intersectionMidpoint, yPos),
-                        (point2[0], yPos)
+                        (point2[0], yPos),
+                        (self.intersectionMidpoint, yPos)
                     )
                 )
             for laneNum in range(numNeg):
@@ -89,8 +89,8 @@ class Street:
                 )
                 self.lanesNeg.append(
                     Lane(
-                        (xPos, self.intersectionMidpoint),
-                        (xPos, point2[1])
+                        (xPos, point2[1]),
+                        (xPos, self.intersectionMidpoint)
                     )
                 )
             # building up lanes from right inwards

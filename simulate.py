@@ -21,8 +21,8 @@ def main():
 
     width = 30
 
-    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 2, 2)
-    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 1, 4)
+    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 2, 2, 1, wWidth // 2)
+    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 1, 4, 1, wHeight // 2)
     streets = [streetH, streetV]
     intersection = Intersection(streetH, streetV)
 

@@ -6,6 +6,11 @@ class Lane:
     WIDTH = 30
 
     def __init__(self, start, end):
+        """
+        :param start: the point indicating the middle (widthwise) of the start (lengthwise) of the of the lane--THIS IS
+         WHERE THE CARS SPAWN
+        :param end: the end
+        """
         self.start = start
         if start[0] == end[0]:
             self.rect = pygame.Rect(start[0] - self.WIDTH // 2, min(start[1], end[1]), self.WIDTH, abs(end[1] - start[1]))
