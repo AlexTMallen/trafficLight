@@ -5,6 +5,7 @@ import json
 from Street import Street
 from Lane import Lane
 from Light import Light
+import constants
 
 
 class Intersection:
@@ -16,12 +17,7 @@ class Intersection:
         self.streetV = streetV
         self.lightColors = ['green', 'red']
         self.carsInIntersection = 0
-
-        # a list of lists of which green lights can be on at the same time
-        self.cycles = [
-            list(range(self.streetH.numLanes)),  # horizontal lights
-            list(range(self.streetH.numLanes, self.streetH.numLanes + self.streetV.numLanes))  # vertical lights
-        ]
+        self.totalCycleLength = 32*constants.SECOND
 
         # calculate coordinates of intersection
         self.x = streetV.point1[0] - streetV.width // 2
@@ -60,25 +56,43 @@ class Intersection:
 
         with open("colors.json") as f:
             self.lightColors = json.loads(f.read())
+        
+        
+        # a list of default cycles
+        self.redCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
+            
+        self.hgreenCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
+        for i in range(self.streetH.numLanes):
+            self.hgreenCycle[i] = 'green'
+            
+        self.hyellowCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
+        for i in range(self.streetH.numLanes):
+            self.hyellowCycle[i] = 'yellow'
+            
+        self.vgreenCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
+        for i in range(self.streetH.numLanes, self.streetH.numLanes + self.streetV.numLanes):
+            self.vgreenCycle[i] = 'green'
+            
+        self.vyellowCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
+        for i in range(self.streetH.numLanes, self.streetH.numLanes + self.streetV.numLanes):
+            self.vyellowCycle[i] = 'yellow'
+        
+
+
+
+
+    
+
+        
+        
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.lightColors["darkG"], self.rect)
 
-    def changeToYellow(self):
-        for light in self.lights:
-            if light.color == 'green':
-                light.color = 'yellow'
-
-    def changeToRed(self):
-        for light in self.lights:
-            light.color = 'red'
 
     def changeToCycle(self, cycle):
-        for light in self.lights:
-            light.color = 'red'
-
-        for light in cycle:
-            self.lights[light].color = 'green'
+        for i in range (self.streetH.numLanes + self.streetV.numLanes):
+            self.lights[i].color = cycle[i]
 
     def findStops(self):
         for light in self.lights:
@@ -94,6 +108,29 @@ class Intersection:
             if light.color == 'green':
                 light.lane.stopPoints = []
 
+
+    def changeCycle(self, time):
+        if time == 0:
+            self.changeToCycle(self.hgreenCycle)
+        
+        elif time == 10*constants.SECOND:
+            self.changeToCycle(self.hyellowCycle)
+        
+        elif time == 14*constants.SECOND:
+            self.changeToCycle(self.redCycle)
+        
+        elif time == 16*constants.SECOND:
+            self.changeToCycle(self.vgreenCycle)
+        
+        elif time == 26*constants.SECOND:
+            self.changeToCycle(self.vyellowCycle)
+        
+        elif time == 30*constants.SECOND:
+            self.changeToCycle(self.redCycle)
+        
+        elif time == 32*constants.SECOND:
+            self.changeToCycle(self.hgreenCycle)
+        
 # currently not being called
     def changeLights(self, i):
         # use traffic data to determine when to change the lights

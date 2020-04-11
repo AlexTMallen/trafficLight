@@ -6,6 +6,7 @@ from Lane import Lane
 from Car import Car
 from Street import Street
 from Intersection import Intersection
+import constants
 
 
 def main():
@@ -21,8 +22,8 @@ def main():
 
     width = 30
 
-    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 2, 2, 1, wWidth // 2)
-    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 1, 4, 1, wHeight // 2)
+    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 2, 2, 0, wWidth // 2)
+    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 1, 3, 0, wHeight // 2)
     streets = [streetH, streetV]
     intersection = Intersection(streetH, streetV)
 
@@ -33,30 +34,20 @@ def main():
     cars = []
 
     waitTime = 10
-    flipTime = 590
-    cycleNumber = 0
+    time = 0
     running = True
+    intersection.changeToCycle(intersection.hgreenCycle)
 
     carRects = []
     while running:
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 return
-        flipTime = flipTime + 1
-        if flipTime == 300:
-            intersection.changeToYellow()
-
-        if flipTime == 500:
-            intersection.changeToRed()
-
-        if flipTime == 600:
-            if cycleNumber == 0:
-                intersection.changeToCycle(intersection.cycles[0])
-                cycleNumber = 1
-            else:
-                intersection.changeToCycle(intersection.cycles[1])
-                cycleNumber = 0
-            flipTime = 0
+        time += 1
+        intersection.changeCycle(time)
+        if time == intersection.totalCycleLength:
+            time = 0
+        
 
         if np.random.randint(20) == 0:
             i = np.random.randint(2)
