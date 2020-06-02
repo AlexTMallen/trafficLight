@@ -49,13 +49,15 @@ class Street:
                 self.lanesPosLeft.append(
                     Lane(
                         (point1[0], yPos),
-                        (self.intersectionMidpoint, yPos)
+                        (self.intersectionMidpoint, yPos),
+                        type="left"
                     )
                 )
                 self.lanesNegLeft.append(
                     Lane(
                         (point2[0], yPos),
-                        (self.intersectionMidpoint, yPos)
+                        (self.intersectionMidpoint, yPos),
+                        "left"
                     )
                 )
             for laneNum in range(numNeg):
@@ -84,13 +86,15 @@ class Street:
                 self.lanesPosLeft.append(
                     Lane(
                         (xPos, point1[1]),
-                        (xPos, self.intersectionMidpoint)
+                        (xPos, self.intersectionMidpoint),
+                        type="left"
                     )
                 )
-                self.lanesNeg.append(
+                self.lanesNegLeft.append(
                     Lane(
                         (xPos, point2[1]),
-                        (xPos, self.intersectionMidpoint)
+                        (xPos, self.intersectionMidpoint),
+                        type="left"
                     )
                 )
             # building up lanes from right inwards

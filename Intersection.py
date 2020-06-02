@@ -60,7 +60,7 @@ class Intersection:
         
         # a list of default cycles
         self.redCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
-            
+        self.greenCycle = ['green' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
         self.hgreenCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
         for i in range(self.streetH.numLanes):
             self.hgreenCycle[i] = 'green'
@@ -110,26 +110,27 @@ class Intersection:
 
 
     def changeCycle(self, time):
-        if time == 0:
-            self.changeToCycle(self.hgreenCycle)
-        
-        elif time == 10*constants.SECOND:
-            self.changeToCycle(self.hyellowCycle)
-        
-        elif time == 14*constants.SECOND:
-            self.changeToCycle(self.redCycle)
-        
-        elif time == 16*constants.SECOND:
-            self.changeToCycle(self.vgreenCycle)
-        
-        elif time == 26*constants.SECOND:
-            self.changeToCycle(self.vyellowCycle)
-        
-        elif time == 30*constants.SECOND:
-            self.changeToCycle(self.redCycle)
-        
-        elif time == 32*constants.SECOND:
-            self.changeToCycle(self.hgreenCycle)
+        # if time == 0:
+        #     self.changeToCycle(self.hgreenCycle)
+        #
+        # elif time == 10*constants.SECOND:
+        #     self.changeToCycle(self.hyellowCycle)
+        #
+        # elif time == 14*constants.SECOND:
+        #     self.changeToCycle(self.redCycle)
+        #
+        # elif time == 16*constants.SECOND:
+        #     self.changeToCycle(self.vgreenCycle)
+        #
+        # elif time == 26*constants.SECOND:
+        #     self.changeToCycle(self.vyellowCycle)
+        #
+        # elif time == 30*constants.SECOND:
+        #     self.changeToCycle(self.redCycle)
+        #
+        # elif time == 32*constants.SECOND:
+        #     self.changeToCycle(self.hgreenCycle)
+        self.changeToCycle(self.greenCycle)
         
 # currently not being called
     def changeLights(self, i):
