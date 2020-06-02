@@ -54,12 +54,18 @@ class Car:
                 if self.lane.direction[0] == 0:  # if car is on a vertical lane
                     otherStreet = self.intersection.streetH
                     dir = self.lane.direction[1]
-                    self.targetLane = otherStreet.lanesNeg[-1] if dir < 0 else otherStreet.lanesPos[-1]
+                    n = self.intersection.streetV.numLeftOnly \
+                        - (self.intersection.streetV.lanesPosLeft.index(self.lane) if dir == 1
+                           else self.intersection.streetV.lanesNegLeft.index(self.lane))
+                    self.targetLane = otherStreet.lanesNeg[-n] if dir == -1 else otherStreet.lanesPos[-n]
                     self.targetLaneDist = (self.targetLane.start[1] - self.lane.start[1]) * dir
                 else:
                     otherStreet = self.intersection.streetV
                     dir = self.lane.direction[0]
-                    self.targetLane = otherStreet.lanesNeg[-1] if dir > 0 else otherStreet.lanesPos[-1]
+                    n = self.intersection.streetH.numLeftOnly \
+                        - (self.intersection.streetH.lanesPosLeft.index(self.lane) if dir == 1
+                           else self.intersection.streetH.lanesNegLeft.index(self.lane))
+                    self.targetLane = otherStreet.lanesNeg[-n] if dir == 1 else otherStreet.lanesPos[-n]
                     self.targetLaneDist = (self.targetLane.start[0] - self.lane.start[0]) * dir
                 # when the car's distance (front of car) is self.initiateDist, it will start turning
                 self.initiateDist = self.targetLaneDist - 1.5 * Lane.WIDTH + (Lane.WIDTH - Car.WIDTH // 2)

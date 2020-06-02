@@ -22,8 +22,8 @@ def main():
 
     width = 30
 
-    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 1, 1, 1, wWidth // 2)
-    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 3, 3, 1, wHeight // 2)
+    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 1, 1, 2, wWidth // 2)
+    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 3, 3, 0, wHeight // 2)
     intersection = Intersection(streetH, streetV)
 
     cars = []
@@ -52,10 +52,10 @@ def main():
         #         cars.append(car)
         # TODO: debug only
         if time % 250 == 10:
-            car = Car((255, 0, 0), streetH.lanesPosLeft[0], intersection, desiredSpeed=1)
+            car = Car((255, 0, 0), streetH.lanesPosLeft[1], intersection, desiredSpeed=1)
             if not car.hitBox.collidelistall(carRects):  # Making sure the cars don't overlap when spawned
                 cars.append(car)
-            car = Car((255, 0, 0), streetH.lanesNegLeft[0], intersection, desiredSpeed=1)
+            car = Car((255, 0, 0), streetH.lanesPosLeft[0], intersection, desiredSpeed=1)
             if not car.hitBox.collidelistall(carRects):  # Making sure the cars don't overlap when spawned
                 cars.append(car)
         w.fill(colors["green"])
