@@ -22,8 +22,8 @@ def main():
 
     width = 30
 
-    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 2, 2, 0, wWidth // 2)
-    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 1, 3, 0, wHeight // 2)
+    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 3, 3, 1, wWidth // 2)
+    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 4, 3, 0, wHeight // 2)
     streets = [streetH, streetV]
     intersection = Intersection(streetH, streetV)
 
@@ -86,7 +86,7 @@ def main():
                 cars.remove(c)
 
         for light in intersection.lights:
-            light.draw(w)
+            light[0].draw(w)
 
         pygame.display.flip()
         pygame.time.wait(waitTime)
