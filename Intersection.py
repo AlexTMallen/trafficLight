@@ -25,33 +25,42 @@ class Intersection:
         self.rect = pygame.Rect(self.x, self.y, streetV.width, streetH.width)
 
         # lists holding all lights opposite a lane of that direction
-        self.lightsUp = []
-        self.lightsDown = []
-        self.lightsLeft = []
-        self.lightsRight = []
         self.lights = []
+        
         # spawn lights for horizontal street
-        # TODO: possibly restructure how we store lights to account for different kinds of lights
-        for current_lane in self.streetH.lanesPos + self.streetH.lanesPosLeft:
+        for current_lane in self.streetH.lanesPos:
             light = Light(current_lane, self)
-            self.lightsRight.append(light)
-            self.lights.append(light)
+            self.lights.append([light,'hPos'])
             current_lane.light = light
-        for current_lane in self.streetH.lanesNeg + self.streetH.lanesNegLeft:
+        for current_lane in self.streetH.lanesPosLeft:
             light = Light(current_lane, self)
-            self.lightsLeft.append(light)
-            self.lights.append(light)
+            self.lights.append([light,"hPosLeft"])
             current_lane.light = light
+        for current_lane in self.streetH.lanesNeg:
+            light = Light(current_lane, self)
+            self.lights.append([light,'hNeg'])
+            current_lane.light = light
+        for current_lane in self.streetH.lanesNegLeft:
+            light = Light(current_lane, self)
+            self.lights.append([light,'hNegLeft'])
+            current_lane.light = light
+            
         # creates lights for vertical street
-        for current_lane in self.streetV.lanesPos + self.streetV.lanesPosLeft:
+        for current_lane in self.streetV.lanesPos:
             light = Light(current_lane, self)
-            self.lightsDown.append(light)
-            self.lights.append(light)
+            self.lights.append([light, 'vPos'])
             current_lane.light = light
-        for current_lane in self.streetV.lanesNeg + self.streetV.lanesNegLeft:
+        for current_lane in self.streetV.lanesPosLeft:
             light = Light(current_lane, self)
-            self.lightsUp.append(light)
-            self.lights.append(light)
+            self.lights.append([light,'vPosLeft'])
+            current_lane.light = light
+        for current_lane in self.streetV.lanesNeg:
+            light = Light(current_lane, self)
+            self.lights.append([light,'vNeg'])
+            current_lane.light = light
+        for current_lane in self.streetV.lanesNegLeft:
+            light = Light(current_lane, self)
+            self.lights.append([light,'vNegLeft'])
             current_lane.light = light
 
         with open("colors.json") as f:
@@ -59,23 +68,33 @@ class Intersection:
         
         
         # a list of default cycles
-        self.redCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
+        lightCount = self.streetH.numLanes + self.streetV.numLanes
+        self.redCycle = ['red' for i in range(lightCount)]
             
-        self.hgreenCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
-        for i in range(self.streetH.numLanes):
-            self.hgreenCycle[i] = 'green'
+        self.hgreenCycle = ['red' for i in range(lightCount)]
+        for i in range(lightCount):
+            if self.lights[i][1] == 'hPos' or 'hNeg':
+                self.hgreenCycle[i] = 'green'
             
-        self.hyellowCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
-        for i in range(self.streetH.numLanes):
-            self.hyellowCycle[i] = 'yellow'
+        self.hyellowCycle = ['red' for i in range(lightCount)]
+        for i in range(lightCount):
+            if self.lights[i][1] == 'hPos' or 'hNeg':
+                self.hgreenCycle[i] = 'yellow'
             
-        self.vgreenCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
-        for i in range(self.streetH.numLanes, self.streetH.numLanes + self.streetV.numLanes):
-            self.vgreenCycle[i] = 'green'
+        self.vgreenCycle = ['red' for i in range(lightCount)]
+        for i in range(lightCount):
+            if self.lights[i][1] == 'vPos' or 'vNeg':
+                self.hgreenCycle[i] = 'green'
             
-        self.vyellowCycle = ['red' for i in range(self.streetH.numLanes + self.streetV.numLanes)]
-        for i in range(self.streetH.numLanes, self.streetH.numLanes + self.streetV.numLanes):
-            self.vyellowCycle[i] = 'yellow'
+        self.vyellowCycle = ['red' for i in range(lightCount)]
+        for i in range(lightCount):
+            if self.lights[i][1] == 'vPos' or 'vNeg':
+                self.hgreenCycle[i] = 'yellow'
+        
+        self.hleftCycle = ['red' for i in range(lightCount)]
+        for i in range(lightCount):
+            if self.lights[i][1] == 'hPosLeft' or 'hNegLeft':
+                self.hleftCycle[i] = 'green'
         
 
 
@@ -84,7 +103,6 @@ class Intersection:
     
 
         
-        
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.lightColors["darkG"], self.rect)
@@ -92,7 +110,7 @@ class Intersection:
 
     def changeToCycle(self, cycle):
         for i in range (self.streetH.numLanes + self.streetV.numLanes):
-            self.lights[i].color = cycle[i]
+            self.lights[i][0].color = cycle[i]
 
     def findStops(self):
         for light in self.lights:
