@@ -86,20 +86,33 @@ class Intersection:
             if self.lights[i][1] == 'vPos' or self.lights[i][1] == 'vNeg':
                 self.vyellowCycle[i] = 'yellow'
 
-        self.hleftCycle = ['red' for i in range(len(self.lights))]
+        self.hleftgreenCycle = ['red' for i in range(len(self.lights))]
         for i in range(len(self.lights)):
             if self.lights[i][1] == 'hPosLeft' or self.lights[i][1] == 'hNegLeft':
-                self.hleftCycle[i] = 'green'
+                self.hleftgreenCycle[i] = 'green'
 
-        self.vleftCycle = ['red' for i in range(len(self.lights))]
+        self.hleftyellowCycle = ['red' for i in range(len(self.lights))]
+        for i in range(len(self.lights)):
+            if self.lights[i][1] == 'hPosLeft' or self.lights[i][1] == 'hNegLeft':
+                self.hleftyellowCycle[i] = 'yellow'
+
+        self.vleftgreenCycle = ['red' for i in range(len(self.lights))]
         for i in range(len(self.lights)):
             if self.lights[i][1] == 'vPosLeft' or self.lights[i][1] == 'vNegLeft':
-                self.vleftCycle[i] = 'green'
+                self.vleftgreenCycle[i] = 'green'
+
+        self.vleftgreenCycle = ['red' for i in range(len(self.lights))]
+        for i in range(len(self.lights)):
+            if self.lights[i][1] == 'vPosLeft' or self.lights[i][1] == 'vNegLeft':
+                self.vleftgreenCycle[i] = 'green'
 
 
         #The overall traffic cycle. Format is [light config, time in seconds since start of overall traffic cycle]. Make sure the last light config is the same as the first one.
-        self.trafficFlow = [[self.hgreenCycle, 0], [self.hyellowCycle, 6], [self.redCycle, 9], [self.vgreenCycle, 11],
-                            [self.vyellowCycle, 17], [self.redCycle, 20], [self.hgreenCycle, 22]]
+        self.trafficFlow = [[self.hgreenCycle, 0], [self.hyellowCycle, 6], [self.redCycle, 9],
+                            [self.hleftgreenCycle, 11], [self.hleftgreenCycle, 17], [self.redCycle, 20],
+                            [self.vgreenCycle, 22], [self.vyellowCycle, 28], [self.redCycle, 31],
+                            [self.vleftgreenCycle, 33], [self.vleftgreenCycle, 39], [self.redCycle, 42],
+                            [self.hgreenCycle, 44]]
 
         #Faster Debug Version
         #self.trafficFlow = [[self.hleftCycle, 0], [self.vleftCycle, 1], [self.redCycle, 2], [self.vgreenCycle, 3],
