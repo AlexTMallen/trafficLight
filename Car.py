@@ -89,7 +89,7 @@ class Car:
                 self.distance = self.rect.x - self.targetLane.start[0]
             if self.lane.direction[1] == -1:  # if current car's lane is up
                 self.distance = self.targetLane.start[0] - self.rect.x
-            self.distance += Car.LENGTH
+            self.distance += Car.LENGTH * 0.75
             self.lane = self.targetLane
             self.turningLeft = False
             self.leftOffset = 0

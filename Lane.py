@@ -29,6 +29,4 @@ class Lane:
         self.light = None
 
     def draw(self, surface):
-        # pygame.draw.rect(surface, self.colors["lightG"], self.rect)
-        # TODO: for debug only
-        pygame.draw.rect(surface, self.colors["lightG"], self.rect, 1)
+        pygame.draw.rect(surface, self.colors["lightG"], self.rect)

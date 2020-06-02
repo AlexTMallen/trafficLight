@@ -44,20 +44,13 @@ def main():
             time = 0
         
 
-        # if np.random.randint(20) == 0:
-        #     street = random.choice((streetH, streetV))
-        #     carLane = street.lanes[np.random.randint(0, len(street.lanes))]
-        #     car = Car((255, 0, 0), carLane, intersection, desiredSpeed=np.random.normal(1.35, 0.1))
-        #     if not car.hitBox.collidelistall(carRects):  # Making sure the cars don't overlap when spawned
-        #         cars.append(car)
-        # TODO: debug only
-        if time % 250 == 10:
-            car = Car((255, 0, 0), streetH.lanesPosLeft[1], intersection, desiredSpeed=1)
+        if np.random.randint(20) == 0:
+            street = np.random.choice((streetH, streetV))
+            carLane = street.lanes[np.random.randint(0, len(street.lanes))]
+            car = Car((255, 0, 0), carLane, intersection, desiredSpeed=np.random.normal(1.35, 0.1))
             if not car.hitBox.collidelistall(carRects):  # Making sure the cars don't overlap when spawned
                 cars.append(car)
-            car = Car((255, 0, 0), streetH.lanesPosLeft[0], intersection, desiredSpeed=1)
-            if not car.hitBox.collidelistall(carRects):  # Making sure the cars don't overlap when spawned
-                cars.append(car)
+
         w.fill(colors["green"])
         for l in streetH.lanes:
             l.draw(w)
@@ -89,10 +82,6 @@ def main():
 
         for light in intersection.lights:
             light.draw(w)
-
-        # TODO: for debug only
-        for l in streetH.lanes:
-            l.draw(w)
 
         pygame.display.flip()
         pygame.time.wait(waitTime)
