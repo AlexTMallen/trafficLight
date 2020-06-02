@@ -1,30 +1,30 @@
 import pygame
+from Street import Street
+from Intersection import Intersection
 
+    KEYDOWN
 
+#in simulate, make the buttons
 class Button:
-    #write
+    #actually use keyboard
+
     #use is whether the button adds or deletes
-    #item is what the button adds or deletes ()
+    #item is what the button adds or deletes (streets)
     WIDTH = 30
     LENGTH = 60
-    mouseover = False
-    def __init__(self, color,use, item, mouse, pos):
+
+    def __init__(self, color,use, intersection):
         self.color = color
-        mouse = pygame.mouse.get_pos()
 
 
-#draw one button
-#make button click-draggable?
+#make the button interactive - automatically spawn streets to the right/bottom of existing ones and expand intersection
 
-def draw(self, surface, mouseover=True):
+def purpose(button, use, street):
+    if KEYDOWN == true
+        if #add lane
+            intersection.streetH.
 
-    if mouseover:
-        pygame.draw.rect(surface, self.newcolor, self.newcolor)
-    pygame.draw.rect(surface, self.color, self.rect)
+        else if #delete lane starting from the end of the street arraylist
 
 
-#make the button interactive
-
-def purpose(button, use, item):
-    if click
-
+#make the button do other things?
