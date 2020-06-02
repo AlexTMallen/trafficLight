@@ -51,7 +51,7 @@ def main():
 
         if np.random.randint(20) == 0:
             i = np.random.randint(2)
-            carLane = streets[i].lanes[np.random.randint(0, len(streets[i].lanes) - 1)]
+            carLane = streets[i].lanes[np.random.randint(0, len(streets[i].lanes))]
             car = Car((255, 0, 0), carLane, intersection, desiredSpeed=np.random.normal(1.35, 0.1))
             if not car.hitBox.collidelistall(carRects):  # Making sure the cars don't overlap when spawned
                 cars.append(car)
