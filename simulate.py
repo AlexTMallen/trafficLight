@@ -23,7 +23,7 @@ def main():
     width = 30
 
     streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 1, 1, 1, wWidth // 2)
-    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 3, 3, 0, wHeight // 2)
+    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 3, 3, 1, wHeight // 2)
 
     intersection = Intersection(streetH, streetV)
 
@@ -75,11 +75,12 @@ def main():
                     # print("multiple collisions detected")
                     cheese = 0
                 else:
-                    car.speed = cars[collisionIdxs[0]].speed * 0.7
+                    if car.speed != 0:
+                        car.speed = cars[collisionIdxs[0]].speed * 0.7
 
         for c in cars:
             c.move(carRects)
-            c.draw(w, showHitbox=True)
+            c.draw(w, showHitbox=False)
 
             if c.distance >= c.lane.length + 10 * c.LENGTH:
                 cars.remove(c)

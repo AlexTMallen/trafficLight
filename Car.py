@@ -68,7 +68,7 @@ class Car:
                     self.targetLane = otherStreet.lanesNeg[-n] if dir == 1 else otherStreet.lanesPos[-n]
                     self.targetLaneDist = (self.targetLane.start[0] - self.lane.start[0]) * dir
                 # when the car's distance (front of car) is self.initiateDist, it will start turning
-                self.initiateDist = self.targetLaneDist - 1.5 * Lane.WIDTH + (Lane.WIDTH - Car.WIDTH // 2)
+                self.initiateDist = self.targetLaneDist - 2.3 * Lane.WIDTH + (Lane.WIDTH - Car.WIDTH // 2)
 
             self.inIntersection = True
         else:
