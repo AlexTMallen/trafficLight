@@ -87,7 +87,7 @@ class Street:
                         (xPos, self.intersectionMidpoint)
                     )
                 )
-                self.lanesNeg.append(
+                self.lanesNegLeft.append(
                     Lane(
                         (xPos, point2[1]),
                         (xPos, self.intersectionMidpoint)

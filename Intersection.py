@@ -14,7 +14,29 @@ class Intersection:
         self.streetH = streetH
         self.streetV = streetV
         self.carsInIntersection = 0
-        self.totalCycleLength = 32 * constants.SECOND
+
+        self.hg = 6  # horizontalGreenTime
+        self.hy = 3  # horizontalYellowTime
+        self.hr = 2  # horizontalRedTime
+        self.hlg = 6  # horizontalLeftGreen
+        self.hly = 3  # horizontalLeftYellow
+        self.hlr = 2  # horizontalLeftRed
+        if self.streetH.numLeftOnly == 0:
+            self.hlg = 0
+            self.hly = 0
+            self.hlr = 0
+        self.vg = 6  # verticalGreenTime
+        self.vy = 3  # verticalYellowTime
+        self.vr = 2  # verticalRedTime
+        self.vlg = 6  # verticalLeftGreen
+        self.vly = 3  # verticalLeftYellow
+        self.vlr = 2  # verticalLeftRed
+        if self.streetV.numLeftOnly == 0:
+            self.vlg = 0
+            self.vly = 0
+            self.vlr = 0
+
+        self.totalCycleLength = (self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy+self.vr+self.vlg+self.vly+self.vlr) * constants.SECOND
 
         # calculate coordinates of intersection
         self.x = streetV.point1[0] - streetV.width // 2
@@ -108,19 +130,25 @@ class Intersection:
 
 
         #The overall traffic cycle. Format is [light config, time in seconds since start of overall traffic cycle]. Make sure the last light config is the same as the first one.
-        self.trafficFlow = [[self.hgreenCycle, 0], [self.hyellowCycle, 6], [self.redCycle, 9],
-                            [self.hleftgreenCycle, 11], [self.hleftgreenCycle, 17], [self.redCycle, 20],
-                            [self.vgreenCycle, 22], [self.vyellowCycle, 28], [self.redCycle, 31],
-                            [self.vleftgreenCycle, 33], [self.vleftgreenCycle, 39], [self.redCycle, 42],
-                            [self.hgreenCycle, 44]]
+        self.trafficFlow = [[self.hgreenCycle, 0],
+                               [self.hyellowCycle, self.hg],
+                                   [self.redCycle, self.hg+self.hy],
+                            [self.hleftgreenCycle, self.hg+self.hy+self.hr],
+                            [self.hleftgreenCycle, self.hg+self.hy+self.hr+self.hlg],
+                                   [self.redCycle, self.hg+self.hy+self.hr+self.hlg+self.hly],
+                                [self.vgreenCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr],
+                               [self.vyellowCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg],
+                                   [self.redCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy],
+                            [self.vleftgreenCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy+self.vr],
+                            [self.vleftgreenCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy+self.vr+self.vlg],
+                                   [self.redCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy+self.vr+self.vlg+self.vly],
+                                [self.hgreenCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy+self.vr+self.vlg+self.vly+self.vlr]]
 
         #Faster Debug Version
         #self.trafficFlow = [[self.hleftCycle, 0], [self.vleftCycle, 1], [self.redCycle, 2], [self.vgreenCycle, 3],
         #                    [self.vyellowCycle, 4], [self.redCycle, 5], [self.hleftCycle, 6]]
 
         self.totalCycleLength = self.trafficFlow[len(self.trafficFlow) - 1][1]*constants.SECOND
-        print(self.totalCycleLength)
-
         self.cycleNumber = 0
 
 
@@ -150,13 +178,12 @@ class Intersection:
 
     #Goes through the traffic flow configs
     def changeCycle(self, time):
+        if time == 0:
+            self.cycleNumber = 0
         if time == self.trafficFlow[self.cycleNumber][1] * constants.SECOND:
             #print(self.trafficFlow[self.cycleNumber][0])
             self.changeToCycle(self.trafficFlow[self.cycleNumber][0])
             if self.cycleNumber < len(self.trafficFlow) - 1:
                 self.cycleNumber += 1
-
-            else:
-                self.cycleNumber = 0
 
 
