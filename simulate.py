@@ -24,6 +24,7 @@ def main():
 
     streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 1, 1, 2, wWidth // 2)
     streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 3, 3, 0, wHeight // 2)
+
     intersection = Intersection(streetH, streetV)
 
     cars = []
@@ -38,10 +39,12 @@ def main():
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 return
-        time += 1
-        intersection.changeCycle(time)
-        if time == intersection.totalCycleLength:
+
+
+        if time > intersection.totalCycleLength:
             time = 0
+        intersection.changeCycle(time)
+        time += 1
         
 
         if np.random.randint(20) == 0:
@@ -69,7 +72,8 @@ def main():
                 collisionIdxs.remove(i)
                 if len(collisionIdxs) > 1:
                     # TODO: better way to handle this?
-                    print("multiple collisions detected")
+                    # print("multiple collisions detected")
+                    cheese = 0
                 else:
                     car.speed = cars[collisionIdxs[0]].speed * 0.7
 
@@ -81,7 +85,7 @@ def main():
                 cars.remove(c)
 
         for light in intersection.lights:
-            light.draw(w)
+            light[0].draw(w)
 
         pygame.display.flip()
         pygame.time.wait(waitTime)
