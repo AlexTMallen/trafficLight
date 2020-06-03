@@ -37,11 +37,13 @@ class Street:
         # making the lanes in the horizontal case
         if point1[1] == point2[1]:
             for laneNum in range(numPos):
+                # build lanes from bottom inward
                 yPos = point1[1] + self.width // 2 - (laneNum * Lane.WIDTH + Lane.WIDTH // 2)
                 self.lanesPos.append(
                     Lane(
                         (point1[0], yPos),
-                        (point2[0], yPos)
+                        (point2[0], yPos),
+                        type="straightORright" if laneNum == 0 else "normal"
                     )
                 )
             for laneNum in range(numLeftOnly):
@@ -62,10 +64,12 @@ class Street:
                 )
             for laneNum in range(numNeg):
                 yPos = point1[1] - self.width // 2 + laneNum * Lane.WIDTH + Lane.WIDTH // 2
+
                 self.lanesNeg.append(
                     Lane(
                         (point2[0], yPos),
-                        (point1[0], yPos)
+                        (point1[0], yPos),
+                        type="straightORright" if laneNum == 0 else "normal"
                     )
                 )
 
@@ -74,10 +78,12 @@ class Street:
             # building the down lanes from the left inward
             for laneNum in range(numPos):
                 xPos = point1[0] - self.width // 2 + laneNum * Lane.WIDTH + Lane.WIDTH // 2
+
                 self.lanesPos.append(
                     Lane(
                         (xPos, point1[1]),
-                        (xPos, point2[1])
+                        (xPos, point2[1]),
+                        type="straightORright" if laneNum == 0 else "normal"
                     )
                 )
             # building the left only lanes from left to right
@@ -103,7 +109,8 @@ class Street:
                 self.lanesNeg.append(
                     Lane(
                         (xPos, point2[1]),
-                        (xPos, point1[1])
+                        (xPos, point1[1]),
+                        type="straightORright" if laneNum == 0 else "normal"
                     )
                 )
 

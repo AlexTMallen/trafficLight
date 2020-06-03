@@ -10,7 +10,8 @@ import constants
 
 
 def main():
-    np.random.seed(1)
+    seed = 1
+    np.random.seed(seed)
     # setup
     with open("colors.json") as f:
         text = f.read()
@@ -52,6 +53,8 @@ def main():
             street = np.random.choice((streetH, streetV))
             carLane = street.lanes[np.random.randint(0, len(street.lanes))]
             car = Car((255, 0, 0), carLane, intersection, desiredSpeed=np.random.normal(1.35, 0.1))
+            # TODO
+            # car = Car((255, 0, 0), street.lanesNeg[0], intersection, desiredSpeed=np.random.normal(1.35, 0.1))
             if not car.hitBox.collidelistall(carRects):  # Making sure the cars don't overlap when spawned
                 cars.append(car)
 
@@ -67,7 +70,7 @@ def main():
             carRects.append(car.rect)
 
         for i, car in enumerate(cars):
-            if not car.turningLeft:
+            if not car.isTurningLeft:
                 collisionIdxs = car.hitBox.collidelistall(carRects)
                 if collisionIdxs != [i]:
                     collisionIdxs.remove(i)
