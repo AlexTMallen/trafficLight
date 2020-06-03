@@ -1,28 +1,32 @@
 import pygame
 import json
 
+
 class Lane:
+    WIDTH = 30
 
-    def __init__(self, rect, direction):
-        self.rect = rect
-        self.direction = direction
+    def __init__(self, start, end, type="normal"):
+        """
+        :param start: the point indicating the middle (widthwise) of the start (lengthwise) of the of the lane--THIS IS
+         WHERE THE CARS SPAWN
+        :param end: the end
+        """
+        self.type = type
+        self.start = start
+        if start[0] == end[0]:
+            self.rect = pygame.Rect(start[0] - self.WIDTH // 2, min(start[1], end[1]), self.WIDTH, abs(end[1] - start[1]))
+            self.length = abs(end[1] - start[1])
+            self.direction = (0, (end[1] - start[1]) // self.length)
+        else:
+            self.rect = pygame.Rect(min(start[0], end[0]), start[1] - self.WIDTH // 2, abs(end[0] - start[0]), self.WIDTH)
+            self.length = abs(end[0] - start[0])
+            self.direction = ((end[0] - start[0]) // self.length, 0)
+
         with open("colors.json") as f:
-            text = f.read()
-            self.colors = json.loads(text)
+            self.colors = json.loads(f.read())
 
-        if direction == 1:
-            x = 0
-            y = 0
-        else:
-            x = rect.width
-            y = rect.height
-
-        if rect.width > rect.height:
-            y = (2 * rect.y + rect.height) // 2
-        else:
-            x = (2 * rect.x + rect.width) // 2
-
-        self.start = (x, y)
+        self.stopPoints = []
+        self.light = None
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.colors["lightG"], self.rect)
