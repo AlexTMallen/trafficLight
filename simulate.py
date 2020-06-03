@@ -22,15 +22,11 @@ def main():
 
     width = 30
 
-    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 3, 3, 1, wWidth // 2)
-    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 4, 4, 0, wHeight // 2)
-    streets = [streetH, streetV]
+    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 1, 1, 2, wWidth // 2)
+    streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 3, 3, 0, wHeight // 2)
+
     intersection = Intersection(streetH, streetV)
 
-    for l in streetH.lanes:
-        l.draw(w)
-    for l in streetV.lanes:
-        l.draw(w)
     cars = []
 
     waitTime = 10
@@ -52,8 +48,8 @@ def main():
         
 
         if np.random.randint(20) == 0:
-            i = np.random.randint(2)
-            carLane = streets[i].lanes[np.random.randint(0, len(streets[i].lanes))]
+            street = np.random.choice((streetH, streetV))
+            carLane = street.lanes[np.random.randint(0, len(street.lanes))]
             car = Car((255, 0, 0), carLane, intersection, desiredSpeed=np.random.normal(1.35, 0.1))
             if not car.hitBox.collidelistall(carRects):  # Making sure the cars don't overlap when spawned
                 cars.append(car)
@@ -85,7 +81,7 @@ def main():
             c.move(carRects)
             c.draw(w, showHitbox=False)
 
-            if c.distance >= c.lane.length + 2 * c.LENGTH:
+            if c.distance >= c.lane.length + 10 * c.LENGTH:
                 cars.remove(c)
 
         for light in intersection.lights:

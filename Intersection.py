@@ -153,6 +153,7 @@ class Intersection:
 
 
 
+        
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.lightColors["darkG"], self.rect)
@@ -185,5 +186,4 @@ class Intersection:
             self.changeToCycle(self.trafficFlow[self.cycleNumber][0])
             if self.cycleNumber < len(self.trafficFlow) - 1:
                 self.cycleNumber += 1
-
 
