@@ -98,8 +98,8 @@ class Car:
             self.targetLaneDist = 0
 
         if self.turningLeft and self.distance >= self.initiateDist:
-            self.leftOffset += self.speed / 2
-            self.distance += self.speed / 2
+            self.leftOffset += self.speed
+            self.distance += self.speed
         else:
             self.distance += self.speed
         self.updateRect()

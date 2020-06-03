@@ -10,6 +10,7 @@ import constants
 
 
 def main():
+    np.random.seed(1)
     # setup
     with open("colors.json") as f:
         text = f.read()
@@ -66,17 +67,17 @@ def main():
             carRects.append(car.rect)
 
         for i, car in enumerate(cars):
-
-            collisionIdxs = car.hitBox.collidelistall(carRects)
-            if collisionIdxs != [i]:
-                collisionIdxs.remove(i)
-                if len(collisionIdxs) > 1:
-                    # TODO: better way to handle this?
-                    # print("multiple collisions detected")
-                    cheese = 0
-                else:
-                    if car.speed != 0:
-                        car.speed = cars[collisionIdxs[0]].speed * 0.7
+            if not car.turningLeft:
+                collisionIdxs = car.hitBox.collidelistall(carRects)
+                if collisionIdxs != [i]:
+                    collisionIdxs.remove(i)
+                    if len(collisionIdxs) > 1:
+                        # TODO: better way to handle this?
+                        # print("multiple collisions detected")
+                        cheese = 0
+                    else:
+                        if car.speed != 0:
+                            car.speed = cars[collisionIdxs[0]].speed * 0.7
 
         for c in cars:
             c.move(carRects)
