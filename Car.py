@@ -128,7 +128,7 @@ class Car:
             else:  # If up
                 self.hitBox = pygame.Rect(
                     self.lane.start[0] - self.WIDTH // 2 - self.leftOffset,
-                    self.lane.start[1] - self.LENGTH * self.lane.direction[1] + self.distance * self.lane.direction[1] - self.FOLLOWING_TIME * self.speed - self.BUFFER_DISTANCE,
+                    self.lane.start[1] + self.distance * self.lane.direction[1] - self.FOLLOWING_TIME * self.speed - self.BUFFER_DISTANCE,
                     self.WIDTH,
                     self.LENGTH + self.FOLLOWING_TIME * self.speed + self.BUFFER_DISTANCE
                 )
@@ -148,7 +148,7 @@ class Car:
                 )
             else:  # If left
                 self.hitBox = pygame.Rect(
-                    self.lane.start[0] - self.LENGTH * self.lane.direction[0] + self.distance * self.lane.direction[0] - self.FOLLOWING_TIME * self.speed - self.BUFFER_DISTANCE,
+                    self.lane.start[0] + self.distance * self.lane.direction[0] - self.FOLLOWING_TIME * self.speed - self.BUFFER_DISTANCE,
                     self.lane.start[1] - self.WIDTH // 2 + self.leftOffset,
                     self.LENGTH + self.FOLLOWING_TIME * self.speed + self.BUFFER_DISTANCE,
                     self.WIDTH
