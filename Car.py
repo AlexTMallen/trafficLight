@@ -68,7 +68,7 @@ class Car:
                     self.targetLane = otherStreet.lanesNeg[-n] if dir == 1 else otherStreet.lanesPos[-n]
                     self.targetLaneDist = (self.targetLane.start[0] - self.lane.start[0]) * dir
                 # when the car's distance (front of car) is self.initiateDist, it will start turning
-                self.initiateDist = self.targetLaneDist - 1.5 * Lane.WIDTH + (Lane.WIDTH - Car.WIDTH // 2)
+                self.initiateDist = self.targetLaneDist - 2.3 * Lane.WIDTH + (Lane.WIDTH - Car.WIDTH // 2)
 
             self.inIntersection = True
         else:
@@ -128,7 +128,7 @@ class Car:
             else:  # If up
                 self.hitBox = pygame.Rect(
                     self.lane.start[0] - self.WIDTH // 2 - self.leftOffset,
-                    self.lane.start[1] - self.LENGTH * self.lane.direction[1] + self.distance * self.lane.direction[1] - self.FOLLOWING_TIME * self.speed - self.BUFFER_DISTANCE,
+                    self.lane.start[1] + self.distance * self.lane.direction[1] - self.FOLLOWING_TIME * self.speed - self.BUFFER_DISTANCE,
                     self.WIDTH,
                     self.LENGTH + self.FOLLOWING_TIME * self.speed + self.BUFFER_DISTANCE
                 )
@@ -148,7 +148,7 @@ class Car:
                 )
             else:  # If left
                 self.hitBox = pygame.Rect(
-                    self.lane.start[0] - self.LENGTH * self.lane.direction[0] + self.distance * self.lane.direction[0] - self.FOLLOWING_TIME * self.speed - self.BUFFER_DISTANCE,
+                    self.lane.start[0] + self.distance * self.lane.direction[0] - self.FOLLOWING_TIME * self.speed - self.BUFFER_DISTANCE,
                     self.lane.start[1] - self.WIDTH // 2 + self.leftOffset,
                     self.LENGTH + self.FOLLOWING_TIME * self.speed + self.BUFFER_DISTANCE,
                     self.WIDTH
