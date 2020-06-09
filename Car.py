@@ -95,7 +95,7 @@ class Car:
                     dir = self.lane.direction[0]
                     n = self.intersection.streetH.numLeftOnly \
                         - (self.intersection.streetH.lanesPosLeft.laneIndex(self.lane) if dir == 1
-                           else self.intersection.streetH.lanesNegLeft.laneIndex(self.lane))
+                           else self.intersection.streetH.lanesNegLeft.index(self.lane))
                     self.targetLane = otherStreet.lanesNeg[-n] if dir == 1 else otherStreet.lanesPos[-n]
                     self.targetLaneDist = (self.targetLane.start[0] - self.lane.start[0]) * dir
                 # when the car's distance (front of car) is self.initiateDist, it will start turning
