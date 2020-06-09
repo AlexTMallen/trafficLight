@@ -23,7 +23,7 @@ def main():
 
     width = 30
 
-    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 1, 1, 1, wWidth // 2)
+    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 4, 2, 1, wWidth // 2)
     streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 3, 3, 1, wHeight // 2)
 
     intersection = Intersection(streetH, streetV)
@@ -63,6 +63,9 @@ def main():
             l.draw(w)
         for l in streetV.lanes:
             l.draw(w)
+
+        streetH.drawLines(w)
+        streetV.drawLines(w)
 
         intersection.draw(w)
         carRects = []

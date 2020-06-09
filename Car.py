@@ -87,7 +87,7 @@ class Car:
                     n = self.intersection.streetV.numLeftOnly \
                         - (self.intersection.streetV.lanesPosLeft.index(self.lane) if dir == 1
                            else self.intersection.streetV.lanesNegLeft.index(self.lane))
-                    self.targetLane = otherStreet.lanesNeg[-n] if dir == -1 else otherStreet.lanesPos[-n]
+                    self.targetLane = otherStreet.lanesNeg[-n] if dir == -1 else otherStreet.lanesPos[0]
                     self.targetLaneDist = (self.targetLane.start[1] - self.lane.start[1]) * dir
                 else:
                     otherStreet = self.intersection.streetV

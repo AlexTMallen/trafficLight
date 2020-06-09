@@ -30,4 +30,3 @@ class Lane:
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.colors["lightG"], self.rect)
-        pygame.draw.rect(surface, self.colors["white"], self.rect, 1)
