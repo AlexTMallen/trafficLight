@@ -20,7 +20,6 @@ def main():
     wWidth = 800
     wHeight = 800
     w = pygame.display.set_mode((wWidth, wHeight))
-    w.fill(colors["green"])
 
     width = 30
 
@@ -52,7 +51,8 @@ def main():
         if np.random.randint(20) == 0:
             street = np.random.choice((streetH, streetV))
             carLane = street.lanes[np.random.randint(0, len(street.lanes))]
-            car = Car((255, 0, 0), carLane, intersection, desiredSpeed=np.random.normal(1.35, 0.1))
+            carColor = np.random.choice(Car.COLORS)
+            car = Car(carLane, intersection, carColor, desiredSpeed=np.random.normal(1.35, 0.1))
             # TODO
             # car = Car((255, 0, 0), street.lanesNeg[0], intersection, desiredSpeed=np.random.normal(1.35, 0.1))
             if not car.hitBox.collidelistall(carRects):  # Making sure the cars don't overlap when spawned

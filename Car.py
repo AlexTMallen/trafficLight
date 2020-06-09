@@ -8,20 +8,32 @@ class Car:
     LENGTH = 25
     FOLLOWING_TIME = 20
     BUFFER_DISTANCE = 10
+    DIRECTIONS = {
+        (1, 0): "Right",
+        (-1, 0): "Left",
+        (0, 1): "Down",
+        (0, -1): "Up"
+    }
+    COLORS = ("Blue", "Yellow", "Green", "Red", "Gray", "White")
 
-    def __init__(self, color, lane, intersection, desiredSpeed=1):
+    def __init__(self, lane, intersection, color, desiredSpeed=1):
         self.color = color
         self.hitBoxColor = (0, 0, 255, 10)
         self.lane = lane
         self.distance = 0
         self.desiredSpeed = desiredSpeed
         self.speed = 1
+        if color in Car.COLORS:
+            self.color = color
+        else:
+            raise ValueError('Color must be one of {"Blue", "Yellow", "Green", "Red", "Gray", "White"}')
         self.rect = None
         self.hitBox = None
         self.inIntersection = False
         self.intersection = intersection
         self.addedSelfToIntersection = False
         self.removedSelfFromIntersection = False
+        self.image = pygame.image.load(self.color + "Car" + Car.DIRECTIONS[self.lane.direction] + ".png")
 
         # for turning left
         self.isTurningLeft = False
@@ -109,6 +121,7 @@ class Car:
                 self.distance = self.targetLane.start[0] - self.rect.x
             self.distance += Car.LENGTH * 0.75
             self.lane = self.targetLane
+            self.image = pygame.image.load(self.color + "Car" + Car.DIRECTIONS[self.lane.direction] + ".png")
             self.isTurningLeft = False
             self.leftOffset = 0
             self.targetLane = None
@@ -126,6 +139,7 @@ class Car:
                 self.distance = self.rect.x - self.targetLane.start[0]
             self.distance += Car.LENGTH * 0.75
             self.lane = self.targetLane
+            self.image = pygame.image.load(self.color + "Car" + Car.DIRECTIONS[self.lane.direction] + ".png")
             self.targetLane = None
             self.targetLaneDist = 0
             self.isTurningRight = False
@@ -137,11 +151,11 @@ class Car:
             self.distance += self.speed
         self.updateRect()
 
-
     def draw(self, surface, showHitbox=True):
         if showHitbox:
             pygame.draw.rect(surface, self.hitBoxColor, self.hitBox)
-        pygame.draw.rect(surface, self.color, self.rect)
+        # pygame.draw.rect(surface, self.color, self.rect)
+        surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def updateRect(self):
         if self.lane.direction[0] == 0:  # If vertical lane
