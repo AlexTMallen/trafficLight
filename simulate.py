@@ -58,12 +58,14 @@ def main():
                         options.laneIndex[options.currentIndex] = options.laneIndex[options.currentIndex][:-1]
                     else:
                         options.laneIndex[options.currentIndex] += e.unicode
+                        print(e.unicode)
+                        print(options.laneIndex)
                 else:
                     if e.key == pygame.K_ESCAPE:
                         simulating = not simulating
                     if e.key == pygame.K_r:
-                        streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), int(options.hposLanes), int(options.hnegLanes), int(options.hleftLanes), wWidth // 2)
-                        streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), int(options.vposLanes), int(options.vnegLanes), int(options.vleftLanes), wHeight // 2)
+                        streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), int(options.laneIndex[0]), int(options.laneIndex[1]), int(options.laneIndex[2]), wWidth // 2)
+                        streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), int(options.laneIndex[3]), int(options.laneIndex[4]), int(options.laneIndex[5]), wHeight // 2)
                         intersection = Intersection(streetH, streetV)
                         cars = []
                         time = 0

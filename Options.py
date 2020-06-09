@@ -44,12 +44,12 @@ class Options:
         self.text(surface, "Up:    ", 0, 340)
         self.text(surface, "VTurn: ", 0, 420)
 
-        self.text(surface, str(self.hposLanes), 200, 20)
-        self.text(surface, str(self.hnegLanes), 200, 100)
-        self.text(surface, str(self.hleftLanes), 200, 180)
-        self.text(surface, str(self.vposLanes), 200, 260)
-        self.text(surface, str(self.vnegLanes), 200, 340)
-        self.text(surface, str(self.vleftLanes), 200, 420)
+        self.text(surface, str(self.laneIndex[0]), 200, 20)
+        self.text(surface, str(self.laneIndex[1]), 200, 100)
+        self.text(surface, str(self.laneIndex[2]), 200, 180)
+        self.text(surface, str(self.laneIndex[3]), 200, 260)
+        self.text(surface, str(self.laneIndex[4]), 200, 340)
+        self.text(surface, str(self.laneIndex[5]), 200, 420)
 
 
 
