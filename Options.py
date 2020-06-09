@@ -3,29 +3,29 @@ import json
 
 class Options:
 
-    def __init__(self, hposLanes, hnegLanes, hleftLanes, vposLanes, vnegLanes, vleftLanes):
-
-        #these are currently broken and might not be necessary - should just input directly into array
-        self.hposLanes = str(hposLanes)
-        self.hnegLanes = str(hnegLanes)
-        self.hleftLanes = str(hleftLanes)
-        self.vposLanes = str(vposLanes)
-        self.vnegLanes = str(vnegLanes)
-        self.vleftLanes = str(vleftLanes)
+    def __init__(self, hposLanes, hnegLanes, hleftLanes, vposLanes, vnegLanes, vleftLanes, carDensity, simSpeed):
 
 
-        self.hposBox = pygame.Rect(200,20,50,50)
-        self.hnegBox = pygame.Rect(200, 100, 50, 50)
-        self.hleftBox = pygame.Rect(200, 180, 50, 50)
-        self.vposBox = pygame.Rect(200, 260, 50, 50)
-        self.vnegBox = pygame.Rect(200, 340, 50, 50)
-        self.vleftBox = pygame.Rect(200, 420, 50, 50)
+        self.index = [str(hposLanes), str(hnegLanes), str(hleftLanes), str(vposLanes), str(vnegLanes),
+                          str(vleftLanes), str(carDensity), str(simSpeed)]
+
+        self.inputBoxes = []
+
+        self.left_column_x = 80
+        self.left_column_y = 200
+        self.right_column_x = 450
+        self.right_column_y = 200
+        self.spacing = 80
+        for i in range(6):
+            self.inputBoxes.append(pygame.Rect(self.left_column_x + 185, self.left_column_y - 10 + 80 * i, 40, 50))
+
+        for i in range(2):
+            self.inputBoxes.append(pygame.Rect(self.right_column_x + 192, self.right_column_y - 15 + 80 * i, 40, 50))
+
 
         self.typing = False
-        self.currentBox = self.hposBox
-        self.typeBoxes = [self.hposBox, self.hnegBox, self.hleftBox, self.vposBox, self.vnegBox, self.vleftBox]
-        self.laneIndex = [self.hposLanes, self.hnegLanes, self.hleftLanes, self.vposLanes, self.vnegLanes, self.vleftLanes]
-        self.currentIndex = self.typeBoxes.index(self.currentBox)
+        self.currentBox = self.inputBoxes[0]
+        self.currentIndex = self.inputBoxes.index(self.currentBox)
 
 
         with open("colors.json") as f:
@@ -38,26 +38,31 @@ class Options:
         if self.typing:
             pygame.draw.rect(surface, self.colors["lightG"], self.currentBox)
 
+        self.text(surface, "Options", 20, 40, 44)
+        self.text(surface, "Lane Counts", self.left_column_x - 10, 120, 34)
+        self.text(surface, "Simulation Settings", self.right_column_x - 20, 120, 34)
 
-        self.text(surface, "Right: ", 0, 20)
-        self.text(surface, "Left:  ", 0, 100)
-        self.text(surface, "HTurn: ", 0, 180)
-        self.text(surface, "Down:  ", 0, 260)
-        self.text(surface, "Up:    ", 0, 340)
-        self.text(surface, "VTurn: ", 0, 420)
+        self.text(surface, "Right: ", self.left_column_x, self.left_column_y, 20)
+        self.text(surface, "Left:  ", self.left_column_x, self.left_column_y + self.spacing, 20)
+        self.text(surface, "Horizontal Turn: ", self.left_column_x, self.left_column_y + self.spacing * 2, 20)
+        self.text(surface, "Down:  ", self.left_column_x, self.left_column_y + self.spacing * 3, 20)
+        self.text(surface, "Up:    ", self.left_column_x, self.left_column_y + self.spacing * 4, 20)
+        self.text(surface, "Vertical Turn: ", self.left_column_x, self.left_column_y + self.spacing * 5, 20)
 
-        self.text(surface, str(self.laneIndex[0]), 200, 20)
-        self.text(surface, str(self.laneIndex[1]), 200, 100)
-        self.text(surface, str(self.laneIndex[2]), 200, 180)
-        self.text(surface, str(self.laneIndex[3]), 200, 260)
-        self.text(surface, str(self.laneIndex[4]), 200, 340)
-        self.text(surface, str(self.laneIndex[5]), 200, 420)
-
+        self.text(surface, "Car Density:", self.right_column_x, self.right_column_y, 20)
+        self.text(surface, "Simulation Speed:", self.right_column_x, self.right_column_y + self.spacing, 20)
 
 
+        for i in range(6):
+            self.text(surface, str(self.index[i]), self.left_column_x + 200, self.left_column_y + 80 * i, 20)
+
+        for i in range(6,8):
+            self.text(surface, str(self.index[i]), self.right_column_x + 200, self.right_column_y + 80 * (i-6), 20)
 
 
-    def text(self, surface, message, x, y):
-        font = pygame.font.Font(pygame.font.get_default_font(), 36)
+
+
+    def text(self, surface, message, x, y, textsize):
+        font = pygame.font.Font(pygame.font.get_default_font(), textsize)
         text_surface = font.render(message, True, self.colors["black"])
         surface.blit(text_surface, dest=(x, y))

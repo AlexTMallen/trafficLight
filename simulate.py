@@ -34,12 +34,13 @@ def main():
 
     waitTime = 10
     time = 0
+    carDensity = 10
     running = True
     simulating = True #whether we're in th options menu or not
     typing = False #whether we're typing or not
     intersection.changeToCycle(intersection.hgreenCycle)
 
-    options = Options(streetH.numPos, streetH.numNeg, streetH.numLeftOnly, streetV.numPos, streetV.numNeg, streetV.numLeftOnly)
+    options = Options(streetH.numPos, streetH.numNeg, streetH.numLeftOnly, streetV.numPos, streetV.numNeg, streetV.numLeftOnly, carDensity, 10/waitTime)
 
 
 
@@ -55,30 +56,31 @@ def main():
                         typing = False
                         options.typing = False
                     elif e.key == pygame.K_BACKSPACE:
-                        options.laneIndex[options.currentIndex] = options.laneIndex[options.currentIndex][:-1]
+                        options.index[options.currentIndex] = options.index[options.currentIndex][:-1]
                     else:
-                        options.laneIndex[options.currentIndex] += e.unicode
+                        options.index[options.currentIndex] += e.unicode
                         print(e.unicode)
-                        print(options.laneIndex)
+                        print(options.index)
                 else:
                     if e.key == pygame.K_ESCAPE:
                         simulating = not simulating
                     if e.key == pygame.K_r:
-                        streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), int(options.laneIndex[0]), int(options.laneIndex[1]), int(options.laneIndex[2]), wWidth // 2)
-                        streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), int(options.laneIndex[3]), int(options.laneIndex[4]), int(options.laneIndex[5]), wHeight // 2)
+                        streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), int(options.index[0]), int(options.index[1]), int(options.index[2]), wWidth // 2)
+                        streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), int(options.index[3]), int(options.index[4]), int(options.index[5]), wHeight // 2)
                         intersection = Intersection(streetH, streetV)
+
                         cars = []
                         time = 0
                         simulating = True
 
             if not simulating:
                 if e.type == pygame.MOUSEBUTTONDOWN:
-                    for box in options.typeBoxes:
+                    for box in options.inputBoxes:
                         if box.collidepoint(e.pos):
                             typing = True
                             options.typing = True
                             options.currentBox = box
-                            options.currentIndex = options.typeBoxes.index(box)
+                            options.currentIndex = options.inputBoxes.index(box)
                             print(options.currentIndex)
 
 
