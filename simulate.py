@@ -36,6 +36,7 @@ def main():
     time = 0
     running = True
     simulating = True
+    typing = False
     intersection.changeToCycle(intersection.hgreenCycle)
 
     options = Options(streetH.numPos, streetH.numNeg, streetH.numLeftOnly, streetV.numPos, streetV.numNeg, streetV.numLeftOnly)
@@ -49,13 +50,34 @@ def main():
             if e.type == pygame.QUIT:
                 return
             if e.type == pygame.KEYDOWN:
-                if e.key == pygame.K_r:
-                    cars = []
-                    time = 0
-                if e.key == pygame.K_ESCAPE:
-                    simulating = False
-                if e.key == pygame.K_RETURN:
-                    simulating = True
+                if typing:
+                    if e.key == pygame.K_RETURN:
+                        typing = False
+                        options.typing = False
+                    elif e.key == pygame.K_BACKSPACE:
+                        options.laneIndex[options.currentIndex] = options.laneIndex[options.currentIndex][:-1]
+                    else:
+                        options.laneIndex[options.currentIndex] += e.unicode
+                else:
+                    if e.key == pygame.K_ESCAPE:
+                        simulating = not simulating
+                    if e.key == pygame.K_r:
+                        streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), int(options.hposLanes), int(options.hnegLanes), int(options.hleftLanes), wWidth // 2)
+                        streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), int(options.vposLanes), int(options.vnegLanes), int(options.vleftLanes), wHeight // 2)
+                        intersection = Intersection(streetH, streetV)
+                        cars = []
+                        time = 0
+                        simulating = True
+
+            if not simulating:
+                if e.type == pygame.MOUSEBUTTONDOWN:
+                    for box in options.typeBoxes:
+                        if box.collidepoint(e.pos):
+                            typing = True
+                            options.typing = True
+                            options.currentBox = box
+                            options.currentIndex = options.typeBoxes.index(box)
+                            print(options.currentIndex)
 
 
 
@@ -112,6 +134,8 @@ def main():
             pygame.time.wait(waitTime)
 
         else:
+
+
             options.draw(w)
 
             pygame.display.flip()
