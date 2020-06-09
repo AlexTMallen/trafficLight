@@ -4,6 +4,8 @@ import json
 class Options:
 
     def __init__(self, hposLanes, hnegLanes, hleftLanes, vposLanes, vnegLanes, vleftLanes):
+
+        #these are currently broken and might not be necessary - should just input directly into array
         self.hposLanes = str(hposLanes)
         self.hnegLanes = str(hnegLanes)
         self.hleftLanes = str(hleftLanes)

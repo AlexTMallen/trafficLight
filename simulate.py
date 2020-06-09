@@ -35,8 +35,8 @@ def main():
     waitTime = 10
     time = 0
     running = True
-    simulating = True
-    typing = False
+    simulating = True #whether we're in th options menu or not
+    typing = False #whether we're typing or not
     intersection.changeToCycle(intersection.hgreenCycle)
 
     options = Options(streetH.numPos, streetH.numNeg, streetH.numLeftOnly, streetV.numPos, streetV.numNeg, streetV.numLeftOnly)
@@ -136,8 +136,6 @@ def main():
             pygame.time.wait(waitTime)
 
         else:
-
-
             options.draw(w)
 
             pygame.display.flip()
