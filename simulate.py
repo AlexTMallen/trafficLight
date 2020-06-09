@@ -34,9 +34,9 @@ def main():
 
     waitTime = 10
     time = 0
-    carDensity = 10
+    carDensity = 1.0
     running = True
-    simulating = True #whether we're in th options menu or not
+    simulating = True #whether we're in the options menu or not
     typing = False #whether we're typing or not
     intersection.changeToCycle(intersection.hgreenCycle)
 
@@ -68,7 +68,8 @@ def main():
                         streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), int(options.index[0]), int(options.index[1]), int(options.index[2]), wWidth // 2)
                         streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), int(options.index[3]), int(options.index[4]), int(options.index[5]), wHeight // 2)
                         intersection = Intersection(streetH, streetV)
-
+                        waitTime = int(round(10/float(options.index[7])))
+                        carDensity = float(options.index[6])
                         cars = []
                         time = 0
                         simulating = True
@@ -92,7 +93,7 @@ def main():
             time += 1
 
 
-            if np.random.randint(20) == 0:
+            if np.random.randint(int(round(40/carDensity))) == 0:
                 street = np.random.choice((streetH, streetV))
                 carLane = street.lanes[np.random.randint(0, len(street.lanes))]
                 car = Car((255, 0, 0), carLane, intersection, desiredSpeed=np.random.normal(1.35, 0.1))
