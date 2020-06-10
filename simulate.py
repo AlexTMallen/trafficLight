@@ -14,7 +14,6 @@ import constants
 def main():
 
     pygame.init()
-    np.random.seed(1)
     # setup
     with open("colors.json") as f:
         text = f.read()
