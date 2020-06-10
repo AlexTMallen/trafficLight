@@ -2,6 +2,15 @@ import pygame
 import json
 
 class Options:
+    COLORS = {
+        "red": [255, 0, 0],
+        "green": [0, 255, 0],
+        "yellow": [255, 255, 0],
+        "white": [255, 255, 255],
+        "black": [0, 0, 0],
+        "lightG": [200, 200, 200],
+        "darkG": [100, 100, 100]
+    }
 
     def __init__(self, hposLanes, hnegLanes, hleftLanes, vposLanes, vnegLanes, vleftLanes, carDensity, simSpeed, vProb):
 
@@ -26,39 +35,37 @@ class Options:
         self.currentIndex = self.inputBoxes.index(self.currentBox)
 
 
-        with open("colors.json") as f:
-            self.colors = json.loads(f.read())
-
 
     def draw(self, surface):
-        surface.fill(self.colors["white"])
+        surface.fill(Options.COLORS["white"])
 
         if self.typing:
-            pygame.draw.rect(surface, self.colors["lightG"], self.currentBox)
+            pygame.draw.rect(surface, Options.COLORS["lightG"], self.currentBox)
 
-        self.text(surface, "Options", 20, 40, 44)
-        self.text(surface, "Lane Counts", self.left_column_x - 10, 120, 34)
-        self.text(surface, "Simulation Settings", self.right_column_x - 20, 120, 34)
+        Options.text(surface, "Options", 20, 40, 44)
+        Options.text(surface, "Lane Counts", self.left_column_x - 10, 120, 34)
+        Options.text(surface, "Simulation Settings", self.right_column_x - 20, 120, 34)
 
-        self.text(surface, "Right: ", self.left_column_x, self.left_column_y, 20)
-        self.text(surface, "Left:  ", self.left_column_x, self.left_column_y + self.spacing, 20)
-        self.text(surface, "Horizontal Turn: ", self.left_column_x, self.left_column_y + self.spacing * 2, 20)
-        self.text(surface, "Down:  ", self.left_column_x, self.left_column_y + self.spacing * 3, 20)
-        self.text(surface, "Up:    ", self.left_column_x, self.left_column_y + self.spacing * 4, 20)
-        self.text(surface, "Vertical Turn: ", self.left_column_x, self.left_column_y + self.spacing * 5, 20)
+        Options.text(surface, "Right: ", self.left_column_x, self.left_column_y, 20)
+        Options.text(surface, "Left:  ", self.left_column_x, self.left_column_y + self.spacing, 20)
+        Options.text(surface, "Horizontal Turn: ", self.left_column_x, self.left_column_y + self.spacing * 2, 20)
+        Options.text(surface, "Down:  ", self.left_column_x, self.left_column_y + self.spacing * 3, 20)
+        Options.text(surface, "Up:    ", self.left_column_x, self.left_column_y + self.spacing * 4, 20)
+        Options.text(surface, "Vertical Turn: ", self.left_column_x, self.left_column_y + self.spacing * 5, 20)
 
-        self.text(surface, "Car Density:", self.right_column_x, self.right_column_y, 20)
-        self.text(surface, "Simulation Speed:", self.right_column_x, self.right_column_y + self.spacing, 20)
-        self.text(surface, "Vrt. Rel. Density:", self.right_column_x, self.right_column_y + self.spacing * 2, 20)
+        Options.text(surface, "Car Density:", self.right_column_x, self.right_column_y, 20)
+        Options.text(surface, "Simulation Speed:", self.right_column_x, self.right_column_y + self.spacing, 20)
+        Options.text(surface, "Vrt. Rel. Density:", self.right_column_x, self.right_column_y + self.spacing * 2, 20)
 
 
         for i in range(6):
-            self.text(surface, str(self.index[i]), self.left_column_x + 200, self.left_column_y + 80 * i, 20)
+            Options.text(surface, str(self.index[i]), self.left_column_x + 200, self.left_column_y + 80 * i, 20)
 
         for i in range(6, len(self.index)):
-            self.text(surface, str(self.index[i]), self.right_column_x + 200, self.right_column_y + 80 * (i-6), 20)
+            Options.text(surface, str(self.index[i]), self.right_column_x + 200, self.right_column_y + 80 * (i-6), 20)
 
-    def text(self, surface, message, x, y, textsize):
+    @staticmethod
+    def text(surface, message, x, y, textsize):
         font = pygame.font.Font(pygame.font.get_default_font(), textsize)
-        text_surface = font.render(message, True, self.colors["black"])
+        text_surface = font.render(message, True, Options.COLORS["black"])
         surface.blit(text_surface, dest=(x, y))

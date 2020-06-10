@@ -7,6 +7,7 @@ from Car import Car
 from Street import Street
 from Intersection import Intersection
 from Options import Options
+from collections import deque
 import constants
 
 
@@ -35,6 +36,7 @@ def main():
 
     waitTime = 10
     time = 0
+    timeAbsolute = 0
     carDensity = 1.2
     running = True
     simulating = True #whether we're in th options menu or not
@@ -42,6 +44,10 @@ def main():
     intersection.changeToCycle(intersection.hgreenCycle)
     vProb = 0.7
     options = Options(streetH.numPos, streetH.numNeg, streetH.numLeftOnly, streetV.numPos, streetV.numNeg, streetV.numLeftOnly, carDensity, 10/waitTime, vProb)
+    carsPassed = 0
+    carsPassedQueue = deque([0]*500)
+    flowRate = 0
+
 
     carRects = []
     while running:
@@ -76,6 +82,8 @@ def main():
                         carDensity = float(options.index[6])
                         cars = []
                         time = 0
+                        carsPassed = 0
+                        carsPassedQueue = deque([0]*500)
                         simulating = True
 
             if not simulating:
@@ -93,6 +101,8 @@ def main():
         intersection.changeCycle(time)
 
         time += 1
+        if timeAbsolute != 0:
+            timeAbsolute += 1
 
         if simulating:
 
@@ -148,6 +158,11 @@ def main():
                     if c in c.lane.cars:
                         c.lane.cars.remove(c)
                     cars.remove(c)
+                    carsPassed += 1
+                    if timeAbsolute == 0:
+                        timeAbsolute += 1
+
+
                 if c.rect.colliderect(intersection.rect):
                     if c in c.lane.cars:
                         c.lane.cars.remove(c)
@@ -169,6 +184,13 @@ def main():
                     streetH.numLanes + streetV.numLanes) < 0.2 * numGreenLanes * len(carsWaiting) and len(
                     cars) >= 6 and time - intersection.trafficFlow[intersection.cycleNumber - 1][1] * constants.SECOND > 200:
                 time = intersection.abruptChangeCycle()
+
+            carsPassedQueue.appendleft(carsPassed)
+            flowRate = carsPassed - carsPassedQueue.pop()
+            if timeAbsolute < 1000:
+                Options.text(w, "Flow Rate: n/a" , 20, 20, 20)
+            else:
+                Options.text(w, "Flow Rate: "+str(flowRate), 20, 20, 20)
 
             pygame.display.flip()
             pygame.time.wait(waitTime)

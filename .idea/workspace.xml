@@ -19,7 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04b7440a-0a33-471e-acf6-58fc6dc5e0c0" name="Default Changelist" comment="" />
+    <list default="true" id="04b7440a-0a33-471e-acf6-58fc6dc5e0c0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Options.py" beforeDir="false" afterPath="$PROJECT_DIR$/Options.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulate.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulate.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,18 +54,6 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
     <configuration name="simulate" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="trafficLight" />
@@ -70,7 +62,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\ATMal\AppData\Local\Programs\Python\Python38-32\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\Justin\PycharmProjects\IntersectionTraffic\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -137,13 +129,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="so I can pull" />
@@ -156,6 +147,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="989" y="295" key="#Options/0.0.2560.1400@0.0.2560.1400" timestamp="1591729059711" />
+    <state x="734" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591760212530">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="734" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1591760212530" />
     <state x="934" y="287" key="CommitChangelistDialog2" timestamp="1591148878126">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -164,22 +159,22 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="248" y="122" width="2048" height="1148" key="DiffContextDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1591729277752" />
-    <state width="2539" height="187" key="GridCell.Tab.0.bottom" timestamp="1591732982880">
+    <state width="1269" height="289" key="GridCell.Tab.0.bottom" timestamp="1591762561904">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="187" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1591732982880" />
-    <state width="2539" height="187" key="GridCell.Tab.0.center" timestamp="1591732982880">
+    <state width="1269" height="289" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1591762561904" />
+    <state width="1269" height="289" key="GridCell.Tab.0.center" timestamp="1591762561903">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="187" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1591732982880" />
-    <state width="2539" height="187" key="GridCell.Tab.0.left" timestamp="1591732982880">
+    <state width="1269" height="289" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1591762561903" />
+    <state width="1269" height="289" key="GridCell.Tab.0.left" timestamp="1591762561903">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="187" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1591732982880" />
-    <state width="2539" height="187" key="GridCell.Tab.0.right" timestamp="1591732982880">
+    <state width="1269" height="289" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1591762561903" />
+    <state width="1269" height="289" key="GridCell.Tab.0.right" timestamp="1591762561904">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="187" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1591732982880" />
+    <state width="1269" height="289" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1591762561904" />
     <state width="2539" height="492" key="GridCell.Tab.1.bottom" timestamp="1591731750576">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
