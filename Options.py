@@ -17,15 +17,17 @@ class Options:
         self.right_column_y = 200
         self.spacing = 80
         for i in range(6):
-            self.inputBoxes.append(pygame.Rect(self.left_column_x + 185, self.left_column_y - 10 + 80 * i, 40, 50))
+            self.inputBoxes.append(pygame.Rect(self.left_column_x + 185, self.left_column_y - 10 + 80 * i, 40, 45))
 
         for i in range(2):
-            self.inputBoxes.append(pygame.Rect(self.right_column_x + 192, self.right_column_y - 15 + 80 * i, 40, 50))
+            self.inputBoxes.append(pygame.Rect(self.right_column_x + 192, self.right_column_y - 15 + 80 * i, 40, 45))
 
 
         self.typing = False
         self.currentBox = self.inputBoxes[0]
         self.currentIndex = self.inputBoxes.index(self.currentBox)
+
+        self.flashTimer = 0
 
 
         with open("colors.json") as f:
@@ -36,7 +38,12 @@ class Options:
         surface.fill(self.colors["white"])
 
         if self.typing:
-            pygame.draw.rect(surface, self.colors["lightG"], self.currentBox)
+            if self.flashTimer < 30:
+                pygame.draw.rect(surface, self.colors["lightG"], self.currentBox)
+            elif self.flashTimer > 40:
+                self.flashTimer = 0
+
+            self.flashTimer += 1
 
         self.text(surface, "Options", 20, 40, 44)
         self.text(surface, "Lane Counts", self.left_column_x - 10, 120, 34)

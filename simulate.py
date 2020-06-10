@@ -58,9 +58,11 @@ def main():
                     elif e.key == pygame.K_BACKSPACE:
                         options.index[options.currentIndex] = options.index[options.currentIndex][:-1]
                     else:
-                        options.index[options.currentIndex] += e.unicode
-                        print(e.unicode)
-                        print(options.index)
+                        if options.currentIndex < 6:
+                            if options.index[options.currentIndex] == '':
+                                options.index[options.currentIndex] += e.unicode
+                        else:
+                            options.index[options.currentIndex] += e.unicode
                 else:
                     if e.key == pygame.K_ESCAPE:
                         simulating = not simulating
@@ -82,7 +84,7 @@ def main():
                             options.typing = True
                             options.currentBox = box
                             options.currentIndex = options.inputBoxes.index(box)
-                            print(options.currentIndex)
+                            options.flashTimer = 0
 
 
 
