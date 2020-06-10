@@ -15,20 +15,20 @@ class Intersection:
         self.streetV = streetV
         self.carsInIntersection = 0
 
-        self.hg = 6  # horizontalGreenTime
+        self.hg = 10  # horizontalGreenTime
         self.hy = 3  # horizontalYellowTime
         self.hr = 2  # horizontalRedTime
-        self.hlg = 6  # horizontalLeftGreen
+        self.hlg = 10  # horizontalLeftGreen
         self.hly = 3  # horizontalLeftYellow
         self.hlr = 2  # horizontalLeftRed
         if self.streetH.numLeftOnly == 0:
             self.hlg = 0
             self.hly = 0
             self.hlr = 0
-        self.vg = 6  # verticalGreenTime
+        self.vg = 10  # verticalGreenTime
         self.vy = 3  # verticalYellowTime
         self.vr = 2  # verticalRedTime
-        self.vlg = 6  # verticalLeftGreen
+        self.vlg = 10  # verticalLeftGreen
         self.vly = 3  # verticalLeftYellow
         self.vlr = 2  # verticalLeftRed
         if self.streetV.numLeftOnly == 0:
@@ -123,10 +123,10 @@ class Intersection:
             if self.lights[i][1] == 'vPosLeft' or self.lights[i][1] == 'vNegLeft':
                 self.vleftgreenCycle[i] = 'green'
 
-        self.vleftgreenCycle = ['red' for i in range(len(self.lights))]
+        self.vleftyellowCycle = ['red' for i in range(len(self.lights))]
         for i in range(len(self.lights)):
             if self.lights[i][1] == 'vPosLeft' or self.lights[i][1] == 'vNegLeft':
-                self.vleftgreenCycle[i] = 'green'
+                self.vleftyellowCycle[i] = 'yellow'
 
 
         #The overall traffic cycle. Format is [light config, time in seconds since start of overall traffic cycle]. Make sure the last light config is the same as the first one.
@@ -134,26 +134,28 @@ class Intersection:
                                [self.hyellowCycle, self.hg],
                                    [self.redCycle, self.hg+self.hy],
                             [self.hleftgreenCycle, self.hg+self.hy+self.hr],
-                            [self.hleftgreenCycle, self.hg+self.hy+self.hr+self.hlg],
+                           [self.hleftyellowCycle, self.hg+self.hy+self.hr+self.hlg],
                                    [self.redCycle, self.hg+self.hy+self.hr+self.hlg+self.hly],
                                 [self.vgreenCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr],
                                [self.vyellowCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg],
                                    [self.redCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy],
                             [self.vleftgreenCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy+self.vr],
-                            [self.vleftgreenCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy+self.vr+self.vlg],
+                           [self.vleftyellowCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy+self.vr+self.vlg],
                                    [self.redCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy+self.vr+self.vlg+self.vly],
                                 [self.hgreenCycle, self.hg+self.hy+self.hr+self.hlg+self.hly+self.hlr+self.vg+self.vy+self.vr+self.vlg+self.vly+self.vlr]]
-
-        #Faster Debug Version
-        #self.trafficFlow = [[self.hleftCycle, 0], [self.vleftCycle, 1], [self.redCycle, 2], [self.vgreenCycle, 3],
-        #                    [self.vyellowCycle, 4], [self.redCycle, 5], [self.hleftCycle, 6]]
 
         self.totalCycleLength = self.trafficFlow[len(self.trafficFlow) - 1][1]*constants.SECOND
         self.cycleNumber = 0
 
-
-
-        
+    def abruptChangeCycle(self):
+        self.changeToCycle(self.trafficFlow[self.cycleNumber][0])
+        newTime = self.trafficFlow[self.cycleNumber][1] * constants.SECOND
+        if self.cycleNumber == len(self.trafficFlow) - 1:
+            self.cycleNumber = 0
+            newTime = 0
+        else:
+            self.cycleNumber += 1
+        return newTime
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.lightColors["darkG"], self.rect)
