@@ -43,10 +43,12 @@ def main():
     typing = False #whether we're typing or not
     intersection.changeToCycle(intersection.hgreenCycle)
     vProb = 0.7
-    options = Options(streetH.numPos, streetH.numNeg, streetH.numLeftOnly, streetV.numPos, streetV.numNeg, streetV.numLeftOnly, carDensity, 10/waitTime, vProb)
+    densityLightAlgorithm = True
+    options = Options(streetH.numPos, streetH.numNeg, streetH.numLeftOnly, streetV.numPos, streetV.numNeg, streetV.numLeftOnly, carDensity, 10/waitTime, vProb, densityLightAlgorithm)
     carsPassed = 0
     carsPassedQueue = deque([0]*500)
     flowRate = 0
+    avgFlowRate = 0
 
 
     carRects = []
@@ -90,11 +92,15 @@ def main():
                 if e.type == pygame.MOUSEBUTTONDOWN:
                     for box in options.inputBoxes:
                         if box.collidepoint(e.pos):
-                            typing = True
-                            options.typing = True
-                            options.currentBox = box
-                            options.currentIndex = options.inputBoxes.index(box)
-                            options.flashTimer = 0
+                            if options.inputBoxes.index(box) == 9:
+                                densityLightAlgorithm = not densityLightAlgorithm
+                                options.index[9] = densityLightAlgorithm
+                            else:
+                                typing = True
+                                options.typing = True
+                                options.currentBox = box
+                                options.currentIndex = options.inputBoxes.index(box)
+                                options.flashTimer = 0
 
         if time > intersection.totalCycleLength:
             time = 0
@@ -179,7 +185,6 @@ def main():
 
             # if the density algorithm is on, and the density of cars with green ahead is less than 20% the density of cars
             # waiting overall, and there are at least 6 cars, and it's been green for at least 2 seconds, then switch
-            densityLightAlgorithm = True
             if densityLightAlgorithm and numCarsInGreen * (
                     streetH.numLanes + streetV.numLanes) < 0.2 * numGreenLanes * len(carsWaiting) and len(
                     cars) >= 6 and time - intersection.trafficFlow[intersection.cycleNumber - 1][1] * constants.SECOND > 200:
@@ -187,10 +192,16 @@ def main():
 
             carsPassedQueue.appendleft(carsPassed)
             flowRate = carsPassed - carsPassedQueue.pop()
-            if timeAbsolute < 1000:
+            avgFlowRate = 500 * carsPassed/(timeAbsolute + 1)
+            if timeAbsolute < 100:
                 Options.text(w, "Flow Rate: n/a" , 20, 20, 20)
+                Options.text(w, "Average Flow Rate: n/a", 20, 70, 20)
             else:
-                Options.text(w, "Flow Rate: "+str(flowRate), 20, 20, 20)
+                Options.text(w, "Current Flow Rate: "+str(flowRate), 20, 20, 20)
+                Options.text(w, "Average Flow Rate: " + str(round(avgFlowRate, 1)), 20, 70, 20)
+
+            Options.text(w, "ESC for options", 550, 20, 20)
+            Options.text(w, "R to reset", 550, 70, 20)
 
             pygame.display.flip()
             pygame.time.wait(waitTime)

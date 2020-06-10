@@ -12,9 +12,9 @@ class Options:
         "darkG": [100, 100, 100]
     }
 
-    def __init__(self, hposLanes, hnegLanes, hleftLanes, vposLanes, vnegLanes, vleftLanes, carDensity, simSpeed, vProb):
+    def __init__(self, hposLanes, hnegLanes, hleftLanes, vposLanes, vnegLanes, vleftLanes, carDensity, simSpeed, vProb, isAlgorithm):
 
-        self.index = list(map(str, [hposLanes, hnegLanes, hleftLanes, vposLanes, vnegLanes, vleftLanes, carDensity, simSpeed, vProb]))
+        self.index = list(map(str, [hposLanes, hnegLanes, hleftLanes, vposLanes, vnegLanes, vleftLanes, carDensity, simSpeed, vProb, isAlgorithm]))
 
         self.inputBoxes = []
 
@@ -26,7 +26,7 @@ class Options:
         for i in range(6):
             self.inputBoxes.append(pygame.Rect(self.left_column_x + 185, self.left_column_y - 10 + 80 * i, 40, 50))
 
-        for i in range(3):
+        for i in range(4):
             self.inputBoxes.append(pygame.Rect(self.right_column_x + 192, self.right_column_y - 15 + 80 * i, 40, 50))
 
 
@@ -56,6 +56,7 @@ class Options:
         Options.text(surface, "Car Density:", self.right_column_x, self.right_column_y, 20)
         Options.text(surface, "Simulation Speed:", self.right_column_x, self.right_column_y + self.spacing, 20)
         Options.text(surface, "Vrt. Rel. Density:", self.right_column_x, self.right_column_y + self.spacing * 2, 20)
+        Options.text(surface, "Light Algorithm:", self.right_column_x, self.right_column_y + self.spacing * 3, 20)
 
 
         for i in range(6):
