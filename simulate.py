@@ -35,16 +35,13 @@ def main():
 
     waitTime = 10
     time = 0
-    carDensity = 10
+    carDensity = 1.2
     running = True
     simulating = True #whether we're in th options menu or not
     typing = False #whether we're typing or not
     intersection.changeToCycle(intersection.hgreenCycle)
-
-    options = Options(streetH.numPos, streetH.numNeg, streetH.numLeftOnly, streetV.numPos, streetV.numNeg, streetV.numLeftOnly, carDensity, 10/waitTime)
-
-
-
+    vProb = 0.7
+    options = Options(streetH.numPos, streetH.numNeg, streetH.numLeftOnly, streetV.numPos, streetV.numNeg, streetV.numLeftOnly, carDensity, 10/waitTime, vProb)
 
     carRects = []
     while running:
@@ -69,7 +66,7 @@ def main():
                     if e.key == pygame.K_ESCAPE:
                         if not simulating:
                             waitTime = int(round(10 / float(options.index[7])))
-                            carDensity = float(options.index[6])
+                            carDensity = np.math.log(float(options.index[6]) + 1) + 1
                         simulating = not simulating
                     if e.key == pygame.K_r:
                         streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), int(options.index[0]), int(options.index[1]), int(options.index[2]), wWidth // 2)
@@ -105,8 +102,9 @@ def main():
             time += 1
 
 
-            if np.random.randint(int(round(40/carDensity))) == 0:
-                street = np.random.choice((streetV, streetH), p=(0.7, 0.3))
+            if np.random.rand() > 1/carDensity:
+                vProb = float(options.index[8])
+                street = np.random.choice((streetV, streetH), p=(vProb, 1 - vProb))
                 carLane = street.lanes[np.random.randint(0, len(street.lanes))]
                 carColor = np.random.choice(Car.COLORS)
                 car = Car(carLane, intersection, carColor, desiredSpeed=np.random.normal(1.35, 0.1))

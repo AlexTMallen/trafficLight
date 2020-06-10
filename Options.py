@@ -3,11 +3,9 @@ import json
 
 class Options:
 
-    def __init__(self, hposLanes, hnegLanes, hleftLanes, vposLanes, vnegLanes, vleftLanes, carDensity, simSpeed):
+    def __init__(self, hposLanes, hnegLanes, hleftLanes, vposLanes, vnegLanes, vleftLanes, carDensity, simSpeed, vProb):
 
-
-        self.index = [str(hposLanes), str(hnegLanes), str(hleftLanes), str(vposLanes), str(vnegLanes),
-                          str(vleftLanes), str(carDensity), str(simSpeed)]
+        self.index = list(map(str, [hposLanes, hnegLanes, hleftLanes, vposLanes, vnegLanes, vleftLanes, carDensity, simSpeed, vProb]))
 
         self.inputBoxes = []
 
@@ -19,7 +17,7 @@ class Options:
         for i in range(6):
             self.inputBoxes.append(pygame.Rect(self.left_column_x + 185, self.left_column_y - 10 + 80 * i, 40, 50))
 
-        for i in range(2):
+        for i in range(3):
             self.inputBoxes.append(pygame.Rect(self.right_column_x + 192, self.right_column_y - 15 + 80 * i, 40, 50))
 
 
@@ -51,16 +49,14 @@ class Options:
 
         self.text(surface, "Car Density:", self.right_column_x, self.right_column_y, 20)
         self.text(surface, "Simulation Speed:", self.right_column_x, self.right_column_y + self.spacing, 20)
+        self.text(surface, "Vrt. Rel. Density:", self.right_column_x, self.right_column_y + self.spacing * 2, 20)
 
 
         for i in range(6):
             self.text(surface, str(self.index[i]), self.left_column_x + 200, self.left_column_y + 80 * i, 20)
 
-        for i in range(6,8):
+        for i in range(6, len(self.index)):
             self.text(surface, str(self.index[i]), self.right_column_x + 200, self.right_column_y + 80 * (i-6), 20)
-
-
-
 
     def text(self, surface, message, x, y, textsize):
         font = pygame.font.Font(pygame.font.get_default_font(), textsize)
