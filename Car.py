@@ -69,7 +69,7 @@ class Car:
                 if self.lane.direction[0] == 0:  # if car is on a vertical lane
                     otherStreet = self.intersection.streetH
                     dir = self.lane.direction[1]
-                    self.targetLane = otherStreet.lanesNeg[0] if dir == 1 else otherStreet.lanesPos[0]
+                    self.targetLane = otherStreet.lanesNeg[0] if dir == 1 else otherStreet.lanesPos[-1]
                     self.targetLaneDist = (self.targetLane.start[1] - self.lane.start[1]) * dir
 
                 else:
