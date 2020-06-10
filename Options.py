@@ -46,6 +46,8 @@ class Options:
         Options.text(surface, "Lane Counts", self.left_column_x - 10, 120, 34)
         Options.text(surface, "Simulation Settings", self.right_column_x - 20, 120, 34)
 
+        Options.text(surface, "R to Apply Changes", 80, 700, 26)
+
         Options.text(surface, "Right: ", self.left_column_x, self.left_column_y, 20)
         Options.text(surface, "Left:  ", self.left_column_x, self.left_column_y + self.spacing, 20)
         Options.text(surface, "Horizontal Turn: ", self.left_column_x, self.left_column_y + self.spacing * 2, 20)
@@ -57,6 +59,7 @@ class Options:
         Options.text(surface, "Simulation Speed:", self.right_column_x, self.right_column_y + self.spacing, 20)
         Options.text(surface, "Vrt. Rel. Density:", self.right_column_x, self.right_column_y + self.spacing * 2, 20)
         Options.text(surface, "Light Algorithm:", self.right_column_x, self.right_column_y + self.spacing * 3, 20)
+
 
 
         for i in range(6):

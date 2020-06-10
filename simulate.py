@@ -151,7 +151,7 @@ def main():
                         collisionIdxs.remove(i)
                         if len(collisionIdxs) > 1:
                             # TODO: better way to handle this?
-                            # print("multiple collisions detected")
+                            #print("multiple collisions detected")
                             cheese = 0
                         else:
                             if car.speed != 0:
