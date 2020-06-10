@@ -29,6 +29,7 @@ def main():
     intersection = Intersection(streetH, streetV)
 
     cars = []
+    carsWaiting = []  # cars that aren't past the intersection yet
 
     waitTime = 10
     time = 0
@@ -45,11 +46,15 @@ def main():
         if time > intersection.totalCycleLength:
             time = 0
         intersection.changeCycle(time)
+        #if
         time += 1
         
 
         if np.random.randint(20) == 0:
-            street = np.random.choice((streetH, streetV))
+            streetNum = np.random.randint(0, 9)
+            street = streetV
+            if streetNum >= 7:  # cars x2 as likely to spawn v than h
+                street = streetH
             carLane = street.lanes[np.random.randint(0, len(street.lanes))]
             carColor = np.random.choice(Car.COLORS)
             car = Car(carLane, intersection, carColor, desiredSpeed=np.random.normal(1.35, 0.1))
@@ -57,6 +62,8 @@ def main():
             # car = Car((255, 0, 0), street.lanesNeg[0], intersection, desiredSpeed=np.random.normal(1.35, 0.1))
             if not car.hitBox.collidelistall(carRects):  # Making sure the cars don't overlap when spawned
                 cars.append(car)
+                carLane.cars.append(car)
+                carsWaiting.append(car)
 
         w.fill(colors["green"])
         for l in streetH.lanes:
@@ -90,10 +97,28 @@ def main():
             c.draw(w, showHitbox=False)
 
             if c.distance >= c.lane.length + 10 * c.LENGTH:
+                if c in c.lane.cars:
+                    c.lane.cars.remove(c)
                 cars.remove(c)
+            if c.rect.colliderect(intersection.rect):
+                if c in c.lane.cars:
+                    c.lane.cars.remove(c)
+                if c in carsWaiting:
+                    carsWaiting.remove(c)
 
+        numCarsInGreen = 0
+        numGreenLanes = 0
         for light in intersection.lights:
             light[0].draw(w)
+            if light[0].color == "green":
+                numGreenLanes += 1
+                numCarsInGreen += len(light[0].lane.cars)
+
+        # if the density algorithm is on, and the density of cars with green ahead is less than 20% the density of cars
+        # waiting overall, and there are at least 6 cars, and it's been green for at least 2 seconds, then switch
+        densityLightAlgorithm = True
+        if densityLightAlgorithm and numCarsInGreen * (streetH.numLanes + streetV.numLanes) < 0.2 * numGreenLanes * len(carsWaiting) and len(cars) >= 6 and time - intersection.trafficFlow[intersection.cycleNumber - 1][1]*constants.SECOND > 200:
+            time = intersection.abruptChangeCycle()
 
         pygame.display.flip()
         pygame.time.wait(waitTime)

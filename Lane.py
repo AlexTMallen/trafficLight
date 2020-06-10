@@ -11,6 +11,7 @@ class Lane:
          WHERE THE CARS SPAWN
         :param end: the end
         """
+        self.cars = []
         self.type = type
         self.start = start
         if start[0] == end[0]:
