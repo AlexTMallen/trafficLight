@@ -65,6 +65,9 @@ def main():
                             options.index[options.currentIndex] += e.unicode
                 else:
                     if e.key == pygame.K_ESCAPE:
+                        if not simulating:
+                            waitTime = int(round(10 / float(options.index[7])))
+                            carDensity = float(options.index[6])
                         simulating = not simulating
                     if e.key == pygame.K_r:
                         streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), int(options.index[0]), int(options.index[1]), int(options.index[2]), wWidth // 2)
