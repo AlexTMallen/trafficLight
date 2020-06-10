@@ -14,7 +14,6 @@ import constants
 def main():
 
     pygame.init()
-    np.random.seed(1)
     # setup
     with open("colors.json") as f:
         text = f.read()
@@ -42,7 +41,7 @@ def main():
     simulating = True #whether we're in th options menu or not
     typing = False #whether we're typing or not
     intersection.changeToCycle(intersection.hgreenCycle)
-    vProb = 0.7
+    vProb = 0.5
     densityLightAlgorithm = True
     options = Options(streetH.numPos, streetH.numNeg, streetH.numLeftOnly, streetV.numPos, streetV.numNeg, streetV.numLeftOnly, carDensity, 10/waitTime, vProb, densityLightAlgorithm)
     carsPassed = 0
