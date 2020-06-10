@@ -19,13 +19,29 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04b7440a-0a33-471e-acf6-58fc6dc5e0c0" name="Default Changelist" comment="" />
+    <list default="true" id="04b7440a-0a33-471e-acf6-58fc6dc5e0c0" name="Default Changelist" comment="Added Flow Rate counter">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Options.py" beforeDir="false" afterPath="$PROJECT_DIR$/Options.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulate.py" beforeDir="false" afterPath="$PROJECT_DIR$/simulate.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="working" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1cmTbYXBF4KutnSNhceyU9PZF4M" />
@@ -38,6 +54,34 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+  <component name="RunManager">
+    <configuration name="simulate" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="trafficLight" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Justin\PycharmProjects\IntersectionTraffic\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/simulate.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.simulate" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -49,6 +93,42 @@
       <option name="presentableId" value="Default" />
       <updated>1591132840429</updated>
     </task>
+    <task id="LOCAL-00001" summary="so I can pull">
+      <created>1591148794564</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1591148794564</updated>
+    </task>
+    <task id="LOCAL-00002" summary="so I can pull">
+      <created>1591148969763</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1591148969764</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ESC to access options menu, ENTER to go back">
+      <created>1591729013182</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1591729013182</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Almost works">
+      <created>1591731977885</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1591731977885</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added Flow Rate counter">
+      <created>1591763390512</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1591763390512</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -61,8 +141,72 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="so I can pull" />
+    <MESSAGE value="ESC to access options menu, ENTER to go back" />
+    <MESSAGE value="Almost works" />
+    <MESSAGE value="Added Flow Rate counter" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Flow Rate counter" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="989" y="295" key="#Options" timestamp="1591729059711">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="989" y="295" key="#Options/0.0.2560.1400@0.0.2560.1400" timestamp="1591729059711" />
+    <state x="734" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591760212530">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="734" y="355" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1591760212530" />
+    <state x="934" y="287" key="CommitChangelistDialog2" timestamp="1591148878126">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="934" y="287" key="CommitChangelistDialog2/0.0.2560.1400@0.0.2560.1400" timestamp="1591148878126" />
+    <state x="248" y="122" width="2048" height="1148" key="DiffContextDialog" timestamp="1591729277752">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="248" y="122" width="2048" height="1148" key="DiffContextDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1591729277752" />
+    <state width="1269" height="289" key="GridCell.Tab.0.bottom" timestamp="1591765317420">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1269" height="289" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1591765317420" />
+    <state width="1269" height="289" key="GridCell.Tab.0.center" timestamp="1591765317419">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1269" height="289" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1591765317419" />
+    <state width="1269" height="289" key="GridCell.Tab.0.left" timestamp="1591765317419">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1269" height="289" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1591765317419" />
+    <state width="1269" height="289" key="GridCell.Tab.0.right" timestamp="1591765317420">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1269" height="289" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1591765317420" />
+    <state width="2539" height="492" key="GridCell.Tab.1.bottom" timestamp="1591731750576">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="492" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1591731750576" />
+    <state width="2539" height="492" key="GridCell.Tab.1.center" timestamp="1591731750576">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="492" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1591731750576" />
+    <state width="2539" height="492" key="GridCell.Tab.1.left" timestamp="1591731750576">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="492" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1591731750576" />
+    <state width="2539" height="492" key="GridCell.Tab.1.right" timestamp="1591731750576">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="492" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1591731750576" />
+    <state x="289" y="122" key="MergeDialog" timestamp="1591148850453">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="289" y="122" key="MergeDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1591148850453" />
+    <state x="1168" y="568" width="306" height="264" key="MultipleFileMergeDialog" timestamp="1591148850459">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1168" y="568" width="306" height="264" key="MultipleFileMergeDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1591148850459" />
     <state x="1043" y="403" key="RollbackChangesDialog" timestamp="1591133199871">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -71,13 +215,25 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="781" y="345" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1591132873551" />
-    <state x="993" y="488" key="git4idea.merge.GitPullDialog" timestamp="1591133348503">
+    <state x="872" y="433" key="Vcs.Push.Dialog.v2" timestamp="1591763398920">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="993" y="488" key="git4idea.merge.GitPullDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1591133348503" />
+    <state x="872" y="433" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1591763398920" />
+    <state x="1089" y="614" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591148686610">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1089" y="614" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400@0.0.2560.1400" timestamp="1591148686610" />
+    <state x="993" y="488" key="git4idea.merge.GitPullDialog" timestamp="1591149338504">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="993" y="488" key="git4idea.merge.GitPullDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1591149338504" />
     <state x="1054" y="599" key="git4idea.ui.GitStashDialog" timestamp="1591133338479">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1054" y="599" key="git4idea.ui.GitStashDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1591133338479" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1591146749125">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1591146749125" />
   </component>
 </project>
