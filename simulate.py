@@ -25,7 +25,7 @@ def main():
 
     width = 30
 
-    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 1, 1, 1, wWidth // 2)
+    streetH = Street((0, wHeight // 2), (wWidth, wHeight // 2), 2, 2, 1, wWidth // 2)
     streetV = Street((wWidth // 2, 0), (wWidth // 2, wHeight), 3, 3, 1, wHeight // 2)
 
     intersection = Intersection(streetH, streetV)
@@ -120,8 +120,7 @@ def main():
                         collisionIdxs.remove(i)
                         if len(collisionIdxs) > 1:
                             # TODO: better way to handle this?
-                            # print("multiple collisions detected")
-                            cheese = 0
+                            print("multiple collisions detected")
                         else:
                             if car.speed != 0:
                                 car.speed = cars[collisionIdxs[0]].speed * 0.7
