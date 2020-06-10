@@ -84,6 +84,7 @@ def main():
                         carDensity = float(options.index[6])
                         cars = []
                         time = 0
+                        timeAbsolute = 0
                         carsPassed = 0
                         carsPassedQueue = deque([0]*500)
                         simulating = True
