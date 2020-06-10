@@ -84,6 +84,7 @@ def main():
                         carDensity = float(options.index[6])
                         cars = []
                         time = 0
+                        timeAbsolute = 0
                         carsPassed = 0
                         carsPassedQueue = deque([0]*500)
                         simulating = True
@@ -150,7 +151,7 @@ def main():
                         collisionIdxs.remove(i)
                         if len(collisionIdxs) > 1:
                             # TODO: better way to handle this?
-                            # print("multiple collisions detected")
+                            #print("multiple collisions detected")
                             cheese = 0
                         else:
                             if car.speed != 0:

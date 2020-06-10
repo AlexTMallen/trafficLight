@@ -146,8 +146,8 @@ class Car:
             self.isTurningRight = False
 
         if self.isTurningLeft and self.distance >= self.initiateDist:
-            self.leftOffset += self.speed
-            self.distance += self.speed
+            self.leftOffset += 1
+            self.distance += 1
         else:
             self.distance += self.speed
         self.updateRect()
