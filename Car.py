@@ -14,7 +14,7 @@ class Car:
         (0, 1): "Down",
         (0, -1): "Up"
     }
-    COLORS = ("Blue", "Yellow", "Green", "Red", "Gray", "White")
+    COLORS = ("blue", "yellow", "green", "red", "gray", "white")
 
     def __init__(self, lane, intersection, color, desiredSpeed=1):
         self.color = color
@@ -26,7 +26,7 @@ class Car:
         if color in Car.COLORS:
             self.color = color
         else:
-            raise ValueError('Color must be one of {"Blue", "Yellow", "Green", "Red", "Gray", "White"}')
+            raise ValueError('Color must be one of {"blue", "yellow", "green", "red", "gray", "white"}')
         self.rect = None
         self.hitBox = None
         self.inIntersection = False
